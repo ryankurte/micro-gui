@@ -8,6 +8,8 @@
 #include "window.h"
 #include "types.h"
 
+#define UGUI_MAX_WINDOW_DEPTH			16
+
 #ifdef __cplusplus
 extern "C" {
 #endif

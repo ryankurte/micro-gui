@@ -44,3 +44,13 @@ void ugui_window_destroy(ugui_window_t window)
 	free(window);
 }
 
+
+void ugui_window_load(ugui_window_t window)
+{
+	window->handlers.load(window);
+}
+
+void ugui_window_unload(ugui_window_t window)
+{
+	window->handlers.unload(window);
+}
