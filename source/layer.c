@@ -30,9 +30,9 @@ void ugui_layer_destroy(ugui_layer_t layer)
 	free(layer);
 }
 
-void ugui_layer_get_bounds(ugui_layer_t layer)
+ugui_rect_t* ugui_layer_get_bounds(ugui_layer_t layer)
 {
-	
+	return &(layer->bounds);
 }
 
 void ugui_layer_add_child(ugui_layer_t layer, ugui_layer_t child)

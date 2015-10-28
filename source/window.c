@@ -6,6 +6,8 @@
 #include "layer.h"
 #include "types.h"
 
+/***			Public				***/
+
 struct ugui_window_s {
 	ugui_layer_t base_layer;
 	ugui_window_handlers_t handlers;
@@ -44,13 +46,14 @@ void ugui_window_destroy(ugui_window_t window)
 	free(window);
 }
 
+/***			Private				***/
 
 void ugui_window_load(ugui_window_t window)
 {
-	window->handlers.load(window);
+	if (window->handlers.load != NULL) window->handlers.load(window);
 }
 
 void ugui_window_unload(ugui_window_t window)
 {
-	window->handlers.unload(window);
+	if (window->handlers.unload != NULL) window->handlers.unload(window);
 }

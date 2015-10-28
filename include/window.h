@@ -8,6 +8,8 @@ extern "C" {
 
 #include "layer.h"
 
+/***			Public				***/
+
 typedef struct ugui_window_s* ugui_window_t;
 
 typedef void (*ugui_window_handler_t)(ugui_window_t window);
