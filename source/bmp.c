@@ -51,9 +51,9 @@ int bmp_create(char* filename, uint32_t w, uint32_t h, bool* data) {
 	index += sizeof(bmpinfoheader);
 
 	//Write data
-	for (int i = 0; i < h; i++) {
+	for (int i = h - 1; i >= 0; i--) {
 		for (int j = 0; j < w; j++) {
-			if (data[i] == 0) {
+			if (data[i * w + j] == false) {
 				filedata[index + 0] = 0x00;
 				filedata[index + 1] = 0x00;
 				filedata[index + 2] = 0x00;
@@ -64,15 +64,15 @@ int bmp_create(char* filename, uint32_t w, uint32_t h, bool* data) {
 			}
 			index += 3;
 		}
-		while ((index + 1) % 4 != 0) {
-			data[index] = 0x00;
-			index ++;
-		}
+
+		//Padding should ensure each section is word aligned
+		//TODO: this is broken
+		index += (w % 4 != 0) ? 4 - (w % 4) : 0;
 	}
 
 	f = fopen(filename, "w");
 
-	fwrite(filedata, 1, sizeof(filedata), f);
+	fwrite(filedata, 1, filesize, f);
 
 	fclose(f);
 

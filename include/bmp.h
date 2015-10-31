@@ -1,6 +1,6 @@
 
-#ifndef UGUI_LAYER_H
-#define UGUI_LAYER_H
+#ifndef BMP_H
+#define BMP_H
 
 #include <stdint.h>
 #include <stdbool.h>
