@@ -11,10 +11,13 @@
 int main(int argc, char *argv[])
 {
 	ugui_t gui = ugui_create(GUI_WIDTH, GUI_HEIGHT);
+	int running = 1;
 
-	bool *img = ugui_get_image(gui);
+	while(running > 0) {
+		bool *img = ugui_get_image(gui);
 
-	bmp_create("test.bmp", GUI_WIDTH, GUI_HEIGHT, (bool*)img);
+		bmp_create("test.bmp", GUI_WIDTH, GUI_HEIGHT, (bool*)img);
+	}
 
 	ugui_destroy(gui);
 
