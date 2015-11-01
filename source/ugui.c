@@ -2,11 +2,13 @@
 #include "ugui.h"
 
 #include <stdlib.h>
+#include <stdint.h>
+#include <stdbool.h>
 
 struct ugui_s {
 	uint32_t w;
 	uint32_t h;
-	uint32_t* buffer;
+	bool* buffer;
 	ugui_window_t windows[UGUI_MAX_WINDOW_DEPTH];
 	uint32_t window_index;
 };
@@ -33,6 +35,25 @@ void ugui_destroy(ugui_t gui)
 	free(gui->buffer);
 
 	free(gui);
+}
+
+bool* ugui_get_image(ugui_t gui)
+{
+	return gui->buffer;
+}
+
+void ugui_put_event(ugui_t gui, uint8_t event)
+{
+	//TODO: pass event to active window handler
+	ugui_window_t current = gui->windows[gui->window_index - 1];
+	ugui_window_put_event(current, event);
+}
+
+void ugui_render(ugui_t gui)
+{
+	//TODO: render active window
+	ugui_window_t current = gui->windows[gui->window_index - 1];
+	ugui_window_render(current, NULL);
 }
 
 void ugui_window_stack_push(ugui_t gui, ugui_window_t window)

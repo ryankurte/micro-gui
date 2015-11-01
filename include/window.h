@@ -23,6 +23,10 @@ ugui_window_t ugui_window_create();
 
 void ugui_window_destroy(ugui_window_t window);
 
+void ugui_window_put_event(ugui_window_t window, int event);
+
+void ugui_window_render(ugui_window_t window, void* craphics_ctx);
+
 ugui_layer_t ugui_window_get_base_layer(ugui_window_t window);
 
 void ugui_window_set_window_handlers(ugui_window_t window, ugui_window_handlers_t handlers);

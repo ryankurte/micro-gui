@@ -9,6 +9,7 @@ struct ugui_layer_s {
 	ugui_rect_t bounds;
 	ugui_layer_update_t update;
 	bool dirty;
+	ugui_layer_t next;
 };
 
 ugui_layer_t ugui_layer_create(ugui_rect_t bounds)
@@ -21,6 +22,8 @@ ugui_layer_t ugui_layer_create(ugui_rect_t bounds)
 	layer->bounds.h = bounds.h;
 
 	layer->update = NULL;
+
+	layer->next = NULL;
 
 	return layer;
 }
@@ -49,3 +52,17 @@ void ugui_layer_set_dirty(ugui_layer_t layer)
 {
 	layer->dirty = true;
 }
+
+void _ugui_layer_attach_next(ugui_layer_t layer, ugui_layer_t next)
+{
+	layer->next = next;
+}
+
+ugui_layer_t _ugui_layer_get_next(ugui_layer_t layer)
+{
+	return layer->next;
+}
+
+
+
+

@@ -3,6 +3,7 @@
 #define UGUI_H
 
 #include <stdint.h>
+#include <stdbool.h>
 
 #include "layer.h"
 #include "window.h"
@@ -15,12 +16,13 @@ extern "C" {
 #endif
 
 enum ugui_event_e {
+	UGUI_EVT_NONE = 0,
 	UGUI_EVT_UP,
 	UGUI_EVT_DOWN,
 	UGUI_EVT_LEFT,
 	UGUI_EVT_RIGHT,
 	UGUI_EVT_SELECT,
-	UGUI_EVENT_BACK
+	UGUI_EVT_BACK
 };
 
 typedef struct ugui_s* ugui_t;
@@ -28,6 +30,8 @@ typedef struct ugui_s* ugui_t;
 ugui_t ugui_create(uint32_t w, uint32_t h);
 
 void ugui_destroy(ugui_t gui);
+
+void ugui_put_event(ugui_t gui, uint8_t event);
 
 void ugui_render(ugui_t gui);
 

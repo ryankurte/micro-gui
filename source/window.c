@@ -27,6 +27,19 @@ ugui_window_t ugui_window_create(uint32_t w, uint32_t h)
 	return window;
 }
 
+void ugui_window_put_event(ugui_window_t window, int event)
+{
+	
+
+}
+
+void ugui_window_render(ugui_window_t window, void* craphics_ctx)
+{
+	//For each layer
+
+
+}
+
 ugui_layer_t ugui_window_get_base_layer(ugui_window_t window)
 {
 	return window->base_layer;
