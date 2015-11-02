@@ -5,10 +5,13 @@
 #include <stdint.h>
 #include <stdbool.h>
 
+#include "graphics.h"
+
 struct ugui_s {
 	uint32_t w;
 	uint32_t h;
 	bool* buffer;
+	ugui_graphics_t graphics;
 	ugui_window_t windows[UGUI_MAX_WINDOW_DEPTH];
 	uint32_t window_index;
 };
@@ -26,6 +29,50 @@ ugui_t ugui_create(uint32_t w, uint32_t h)
 	for (int i = 0; i < UGUI_MAX_WINDOW_DEPTH; i++) {
 		gui->windows[i] = NULL;
 	}
+
+	gui->graphics = ugui_graphics_create(w, h, gui->buffer);
+
+	//Horizontal
+	ugui_graphics_draw_line(gui->graphics, (ugui_point_t) {
+		.x = 0, .y = h/2
+	}, (ugui_point_t) {
+		.x = w, .y = h/2
+	});
+
+	//Vertical
+	ugui_graphics_draw_line(gui->graphics, (ugui_point_t) {
+		.x = w/2, .y = 0
+	}, (ugui_point_t) {
+		.x = w/2, .y = h
+	});
+
+	//Diagonal gentle down
+	ugui_graphics_draw_line(gui->graphics, (ugui_point_t) {
+		.x = 0, .y = 0
+	}, (ugui_point_t) {
+		.x = w, .y = h/2
+	});
+
+	//Diagonal gentle up
+	ugui_graphics_draw_line(gui->graphics, (ugui_point_t) {
+		.x = 0, .y = h
+	}, (ugui_point_t) {
+		.x = w, .y = h/2
+	});
+
+	//Diagonal sharp down
+	ugui_graphics_draw_line(gui->graphics, (ugui_point_t) {
+		.x = 0, .y = 0
+	}, (ugui_point_t) {
+		.x = w/2, .y = h
+	});
+
+	//Diagonal sharp up
+	ugui_graphics_draw_line(gui->graphics, (ugui_point_t) {
+		.x = w/2, .y = h
+	}, (ugui_point_t) {
+		.x = w, .y = 0
+	});
 
 	return gui;
 }

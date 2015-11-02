@@ -53,7 +53,7 @@ int bmp_create(char* filename, uint32_t w, uint32_t h, bool* data) {
 	//Write data
 	for (int i = h - 1; i >= 0; i--) {
 		for (int j = 0; j < w; j++) {
-			if (data[i * w + j] == false) {
+			if (data[i * w + j] == true) {
 				filedata[index + 0] = 0x00;
 				filedata[index + 1] = 0x00;
 				filedata[index + 2] = 0x00;
