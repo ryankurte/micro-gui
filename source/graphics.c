@@ -5,6 +5,8 @@
 #include <stdint.h>
 #include <stdbool.h>
 
+#include <assert.h>
+
 #define ABS(x)	(x < 0 ? -x : x)
 #define SIGN(x)	(x < 0 ? -1 : (x > 0 ? 1 : 0))
 
@@ -44,14 +46,16 @@ void ugui_graphics_clear(ugui_graphics_t graphics)
 	}
 }
 
-static int get_octant(ugui_point_t a, ugui_point_t b)
+void ugui_graphics_draw_line(ugui_graphics_t graphics, ugui_point_t a, ugui_point_t b)
 {
+	//Bresenham's line algorithm (https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm), implementation from:
+	//https://www.opengl.org/discussion_boards/showthread.php/168761-Drawing-Line-Bresenhem-midpoint-algorithm
 
-}
+	assert((a.x >= 0) && (a.x < graphics->w));
+	assert((a.y >= 0) && (a.y < graphics->h));
+	assert((b.x >= 0) && (b.x < graphics->w));
+	assert((b.y >= 0) && (b.y < graphics->h));
 
-
-static void draw_line_internal(ugui_graphics_t graphics, ugui_point_t a, ugui_point_t b)
-{
 	int deltax = (b.x - a.x);
 	int deltay = (b.y - a.y);
 
@@ -61,89 +65,46 @@ static void draw_line_internal(ugui_graphics_t graphics, ugui_point_t a, ugui_po
 	deltax = ABS(deltax);
 	deltay = ABS(deltay);
 
-	//b.x += signx;
-	//b.y += signy;
+	b.x += signx;
+	b.y += signy;
 
 	plot(graphics, a.x, a.y);
 
 	int d = 2 * deltay - deltax;
 
-	if (deltax > deltay)
-	{
-		int y = a.y;
+	if (deltax > deltay) {
 
-		for (int i = a.x + 1; i < b.x; i++) {
-			plot(graphics, i, y);
-			d += (2 * deltay);
-
-			if (d > 0) {
-				y += 1;
-				d -= (2 * deltax);
-			}
-		}
-	} else {
-		int x = a.x;
-
-		for (int i = a.y + 1; i < b.y; i++) {
-			plot(graphics, x, i);
-			d += (2 * deltax);
-
-			if (d > 0) {
-				x += 1;
-				d -= (2 * deltay);
-			}
-		}
-	}
-
-	/*	accum = deltax >> 1;
+		int accum = deltax / 2;
 		do {
-			setCell(x1, y1, 0.4, 0.7, 1.0);
+			plot(graphics, a.x, a.y);
+			accum -= deltay;
+			if (accum < 0) {
+				accum += deltax;
+				a.y += signy;
+			}
 
-			accum -= dy;
+			a.x += signx;
+
+		} while (a.x != b.x);
+
+	} else {
+		int accum = deltay >> 1;
+		do {
+			plot(graphics, a.x, a.y);
+
+			accum -= deltax;
 			if (accum < 0)
 			{
-				accum += dx;
-				y1 += sy;
+				accum += deltay;
+				a.x += signx;
 			}
 
-			x1 += sx;
-		} while (x1 != x2);
-	} else {
-		accum = dy >> 1;
-		do {
-			setCell(x1, y1, 0.4, 0.7, 1.0);
+			a.y += signy;
+		} while (a.y != b.y);
 
-			accum -= dx;
-			if (accum < 0)
-			{
-				accum += dy;
-				x1 += sx;
-			}
-
-			y1 += sy;
-		} while (y1 != y2);
 	}
-	*/
-
 }
 
-void ugui_graphics_draw_line(ugui_graphics_t graphics, ugui_point_t a, ugui_point_t b)
-{
-
-	if (a.x <= b.x) {
-		draw_line_internal(graphics, a, b);
-	} else {
-		draw_line_internal(graphics, b, a);
-	}
-
-#if 0
-	for (int i = 0; i < rect.h; i++) {
-		for (int j = 0; j < rect.w; j++) {
-
-		}
-	}
-#endif
-}
 
 void ugui_graphics_draw_text(ugui_graphics_t graphics, char* text, ugui_font_t font)
 {
