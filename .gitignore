@@ -1,3 +1,4 @@
 *.o
 *.DS_Store
 *.bmp
+ugui.o.dSYM

@@ -32,48 +32,6 @@ ugui_t ugui_create(uint32_t w, uint32_t h)
 
 	gui->graphics = ugui_graphics_create(w, h, gui->buffer);
 
-	//Horizontal
-	ugui_graphics_draw_line(gui->graphics, (ugui_point_t) {
-		.x = 0, .y = h / 2
-	}, (ugui_point_t) {
-		.x = w - 1, .y = h / 2
-	});
-
-	//Vertical
-	ugui_graphics_draw_line(gui->graphics, (ugui_point_t) {
-		.x = w / 2, .y = 0
-	}, (ugui_point_t) {
-		.x = w / 2, .y = h - 1
-	});
-
-	//Diagonal gentle down
-	ugui_graphics_draw_line(gui->graphics, (ugui_point_t) {
-		.x = 0, .y = 0
-	}, (ugui_point_t) {
-		.x = w - 1, .y = h / 2
-	});
-
-	//Diagonal gentle up
-	ugui_graphics_draw_line(gui->graphics, (ugui_point_t) {
-		.x = 0, .y = h - 1
-	}, (ugui_point_t) {
-		.x = w - 1, .y = h / 2
-	});
-
-	//Diagonal sharp down
-	ugui_graphics_draw_line(gui->graphics, (ugui_point_t) {
-		.x = 0, .y = 0
-	}, (ugui_point_t) {
-		.x = w / 2, .y = h - 1
-	});
-
-	//Diagonal sharp up
-	ugui_graphics_draw_line(gui->graphics, (ugui_point_t) {
-		.x = w / 2, .y = h - 1
-	}, (ugui_point_t) {
-		.x = w - 1, .y = 0
-	});
-
 	return gui;
 }
 
