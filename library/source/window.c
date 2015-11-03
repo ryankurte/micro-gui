@@ -27,19 +27,6 @@ ugui_window_t ugui_window_create(uint32_t w, uint32_t h)
 	return window;
 }
 
-void ugui_window_put_event(ugui_window_t window, int event)
-{
-	
-
-}
-
-void ugui_window_render(ugui_window_t window, void* craphics_ctx)
-{
-	//For each layer
-
-
-}
-
 ugui_layer_t ugui_window_get_base_layer(ugui_window_t window)
 {
 	return window->base_layer;
@@ -50,6 +37,7 @@ void ugui_window_set_window_handlers(ugui_window_t window,
 {
 	window->handlers.load = handlers.load;
 	window->handlers.unload = handlers.unload;
+	window->handlers.event = handlers.event;
 }
 
 void ugui_window_destroy(ugui_window_t window)
@@ -61,12 +49,25 @@ void ugui_window_destroy(ugui_window_t window)
 
 /***			Private				***/
 
-void ugui_window_load(ugui_window_t window)
+void _ugui_window_load(ugui_window_t window)
 {
 	if (window->handlers.load != NULL) window->handlers.load(window);
 }
 
-void ugui_window_unload(ugui_window_t window)
+void _ugui_window_unload(ugui_window_t window)
 {
 	if (window->handlers.unload != NULL) window->handlers.unload(window);
 }
+
+void _ugui_window_put_event(ugui_window_t window, int event)
+{
+	if (window->handlers.event) window->handlers.event(window, event);
+}
+
+void _ugui_window_update(ugui_window_t window, void* graphics_ctx)
+{
+	//Render base layer
+	ugui_layer_t base_layer = window->base_layer;
+	_ugui_layer_update(base_layer, graphics_ctx);
+}
+

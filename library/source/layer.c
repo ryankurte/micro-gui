@@ -5,12 +5,16 @@
 #include <stdint.h>
 #include <stdbool.h>
 
+#define UGUI_LAYER_MAX_CHILDREN		8
+
 struct ugui_layer_s {
 	ugui_rect_t bounds;
 	ugui_layer_update_t update;
 	bool dirty;
-	ugui_layer_t next;
+	ugui_layer_t children[UGUI_LAYER_MAX_CHILDREN];
 };
+
+/***			Public				***/
 
 ugui_layer_t ugui_layer_create(ugui_rect_t bounds)
 {
@@ -22,8 +26,6 @@ ugui_layer_t ugui_layer_create(ugui_rect_t bounds)
 	layer->bounds.h = bounds.h;
 
 	layer->update = NULL;
-
-	layer->next = NULL;
 
 	return layer;
 }
@@ -38,9 +40,15 @@ ugui_rect_t* ugui_layer_get_bounds(ugui_layer_t layer)
 	return &(layer->bounds);
 }
 
-void ugui_layer_add_child(ugui_layer_t layer, ugui_layer_t child)
+int32_t ugui_layer_add_child(ugui_layer_t layer, ugui_layer_t child)
 {
-
+	for(uint8_t i=0; i<UGUI_LAYER_MAX_CHILDREN; i++) {
+		if(layer->children[i] == NULL) {
+			layer->children[i] = child;
+			return 1;
+		}
+	}
+	return 0;
 }
 
 void ugui_layer_set_update(ugui_layer_t layer, ugui_layer_update_t update)
@@ -53,15 +61,23 @@ void ugui_layer_set_dirty(ugui_layer_t layer)
 	layer->dirty = true;
 }
 
-void _ugui_layer_attach_next(ugui_layer_t layer, ugui_layer_t next)
+/***			Private				***/
+
+int _ugui_layer_update(ugui_layer_t layer, void* graphics_ctx)
 {
-	layer->next = next;
+	int32_t dirty = 0;
+
+	if(layer->update != NULL) layer->update(layer, graphics_ctx);
+
+	for(uint32_t i=0; i<UGUI_LAYER_MAX_CHILDREN; i++) {
+		if(layer->children[i] != NULL) {
+			dirty += _ugui_layer_update(layer->children[i], graphics_ctx);
+		}
+	}
+
+	return layer->dirty || (dirty > 0);
 }
 
-ugui_layer_t _ugui_layer_get_next(ugui_layer_t layer)
-{
-	return layer->next;
-}
 
 
 

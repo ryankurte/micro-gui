@@ -1,4 +1,6 @@
 
+#include "ugui.h"
+
 void line_test() {
 	
 	//Horizontal
