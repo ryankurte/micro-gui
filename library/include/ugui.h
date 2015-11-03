@@ -8,6 +8,7 @@
 #include "layer.h"
 #include "window.h"
 #include "types.h"
+#include "graphics.h"
 
 #define UGUI_MAX_WINDOW_DEPTH			16
 

@@ -4,6 +4,7 @@
 
 #include "ugui.h"
 #include "bmp.h"
+#include "line_window.h"
 
 #define GUI_WIDTH	640
 #define GUI_HEIGHT	480
@@ -39,6 +40,12 @@ int main(int argc, char *argv[])
 {
 	ugui_t gui = ugui_create(GUI_WIDTH, GUI_HEIGHT);
 	int running = 1;
+
+	ugui_window_t line_test_window = line_window_create(GUI_WIDTH, GUI_HEIGHT);
+
+	ugui_window_stack_push(gui, line_test_window);
+
+	ugui_render(gui);
 
 	//while (running > 0) {
 

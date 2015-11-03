@@ -1,8 +1,9 @@
 
 TARGET = ugui.o
-SOURCES = example/main.c library/source/window.c library/source/layer.c library/source/graphics.c library/source/bmp.c library/source/ugui.c
+SOURCES = example/source/main.c example/source/line_window.c
+LIBS = library/source/window.c library/source/layer.c library/source/graphics.c library/source/bmp.c library/source/ugui.c
 CFLAGS = -std=c11 -g
-IFLAGS = -I./library/include
+IFLAGS = -I./library/include -I./example/include
 
 all: $(SOURCES)
-	gcc $(CFLAGS) $(SOURCES) $(IFLAGS) -o $(TARGET)
+	gcc $(CFLAGS) $(SOURCES) $(LIBS) $(IFLAGS) -o $(TARGET)

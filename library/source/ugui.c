@@ -58,17 +58,21 @@ void ugui_render(ugui_t gui)
 {
 	//TODO: render active window
 	ugui_window_t current = gui->windows[gui->window_index - 1];
-	_ugui_window_update(current, NULL);
+	_ugui_window_update(current, gui->graphics);
 }
 
 void ugui_window_stack_push(ugui_t gui, ugui_window_t window)
 {
 	//Unload last window
-	ugui_window_t last = gui->windows[gui->window_index - 1];
-	_ugui_window_unload(last);
+	if (gui->window_index > 0) {
+		ugui_window_t last = gui->windows[gui->window_index - 1];
+		_ugui_window_unload(last);
+	}
+
 	//Update pointer
+	gui->windows[gui->window_index] = window;
 	gui->window_index ++;
-	gui->windows[gui->window_index - 1] = window;
+
 	//Load new window
 	_ugui_window_load(window);
 }
@@ -76,11 +80,16 @@ void ugui_window_stack_push(ugui_t gui, ugui_window_t window)
 void ugui_window_stack_pop(ugui_t gui)
 {
 	//Unload last window
-	ugui_window_t last = gui->windows[gui->window_index - 1];
-	_ugui_window_unload(last);
-	//Update pointer
-	gui->window_index --;
-	ugui_window_t next = gui->windows[gui->window_index - 1];
-	//Load new window
-	_ugui_window_load(next);
+	if (gui->window_index > 0) {
+		ugui_window_t last = gui->windows[gui->window_index - 1];
+		_ugui_window_unload(last);
+
+		//Update pointer
+		gui->window_index --;
+		ugui_window_t next = gui->windows[gui->window_index - 1];
+
+		//Load new window
+		_ugui_window_load(next);
+	}
 }
+
