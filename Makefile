@@ -1,6 +1,6 @@
 
 TARGET = ugui.o
-SOURCES = example/source/main.c example/source/line_window.c
+SOURCES = example/source/main.c example/source/line_window.c example/source/circle_window.c
 LIBS = library/source/window.c library/source/layer.c library/source/graphics.c library/source/bmp.c library/source/ugui.c
 CFLAGS = -std=c11 -g
 IFLAGS = -I./library/include -I./example/include

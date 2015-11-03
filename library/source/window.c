@@ -11,6 +11,7 @@
 struct ugui_window_s {
 	ugui_layer_t base_layer;
 	ugui_window_handlers_t handlers;
+	ugui_window_event_handler_t on_event;
 };
 
 ugui_window_t ugui_window_create(uint32_t w, uint32_t h)
@@ -23,6 +24,7 @@ ugui_window_t ugui_window_create(uint32_t w, uint32_t h)
 
 	window->handlers.load = NULL;
 	window->handlers.unload = NULL;
+	window->on_event = NULL;
 
 	return window;
 }
@@ -37,7 +39,11 @@ void ugui_window_set_window_handlers(ugui_window_t window,
 {
 	window->handlers.load = handlers.load;
 	window->handlers.unload = handlers.unload;
-	window->handlers.event = handlers.event;
+}
+
+void ugui_window_set_event_handler(ugui_window_t window, ugui_window_event_handler_t on_event)
+{
+	window->on_event = on_event;
 }
 
 void ugui_window_destroy(ugui_window_t window)
@@ -61,7 +67,7 @@ void _ugui_window_unload(ugui_window_t window)
 
 void _ugui_window_put_event(ugui_window_t window, int event)
 {
-	if (window->handlers.event) window->handlers.event(window, event);
+	if (window->on_event) window->on_event(window, event);
 }
 
 void _ugui_window_update(ugui_window_t window, void* graphics_ctx)

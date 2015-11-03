@@ -56,7 +56,9 @@ void ugui_put_event(ugui_t gui, uint8_t event)
 
 void ugui_render(ugui_t gui)
 {
-	//TODO: render active window
+	//TODO: render only if dirty..?
+	//Think about how layers work & offset rendering in update calls
+	ugui_graphics_clear(gui->graphics);
 	ugui_window_t current = gui->windows[gui->window_index - 1];
 	_ugui_window_update(current, gui->graphics);
 }
@@ -86,7 +88,7 @@ void ugui_window_stack_pop(ugui_t gui)
 
 		//Update pointer
 		gui->window_index --;
-		ugui_window_t next = gui->windows[gui->window_index - 1];
+		ugui_window_t next = gui->windows[gui->window_index];
 
 		//Load new window
 		_ugui_window_load(next);
