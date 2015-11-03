@@ -19,7 +19,11 @@ ugui_graphics_t ugui_graphics_create(uint32_t w, uint32_t h, bool* buffer);
 
 void ugui_graphics_destroy(ugui_graphics_t graphics);
 
+void ugui_graphics_draw_line(ugui_graphics_t graphics, ugui_point_t a, ugui_point_t b);
+
 void ugui_graphics_draw_rect(ugui_graphics_t graphics, ugui_rect_t rect);
+
+void ugui_graphics_draw_ellipse(ugui_graphics_t graphics, ugui_rect_t rect);
 
 void ugui_graphics_draw_text(ugui_graphics_t graphics, char* text, ugui_font_t font);
 

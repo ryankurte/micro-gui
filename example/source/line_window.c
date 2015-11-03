@@ -14,6 +14,10 @@ static void line_layer_update(ugui_layer_t layer, void* graphics_ctx)
 	int w = bounds->w;
 	int h = bounds->h;
 
+	ugui_graphics_draw_ellipse(graphics_ctx, (ugui_rect_t) {
+		.x = 0, .y = 0, .w = w - 1, .h = h - 1
+	});
+
 	//Horizontal
 	ugui_graphics_draw_line(graphics_ctx, (ugui_point_t) {
 		.x = 0, .y = h / 2

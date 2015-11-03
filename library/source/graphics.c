@@ -73,16 +73,15 @@ void ugui_graphics_draw_line(ugui_graphics_t graphics, ugui_point_t a, ugui_poin
 	int d = 2 * deltay - deltax;
 
 	if (deltax > deltay) {
-
 		int accum = deltax / 2;
 		do {
 			plot(graphics, a.x, a.y);
+
 			accum -= deltay;
 			if (accum < 0) {
 				accum += deltax;
 				a.y += signy;
 			}
-
 			a.x += signx;
 
 		} while (a.x != b.x);
@@ -93,18 +92,104 @@ void ugui_graphics_draw_line(ugui_graphics_t graphics, ugui_point_t a, ugui_poin
 			plot(graphics, a.x, a.y);
 
 			accum -= deltax;
-			if (accum < 0)
-			{
+			if (accum < 0) {
 				accum += deltay;
 				a.x += signx;
 			}
-
 			a.y += signy;
+
 		} while (a.y != b.y);
 
 	}
 }
 
+void ugui_graphics_draw_ellipse(ugui_graphics_t graphics, ugui_rect_t rect)
+{
+	//Implementation also from:
+	//https://www.opengl.org/discussion_boards/showthread.php/168761-Drawing-Line-Bresenhem-midpoint-algorithm
+
+	int		a, b;
+	int		x, y, a2, b2, S, T;
+	int		two_a2, two_b2;
+	int		four_a2, four_b2;
+	int		temp;
+
+	int left = rect.x;
+	int right = rect.x + rect.w;
+	int top = rect.y;
+	int bottom = rect.y + rect.h;
+
+	//Flip logic, should not be required as rect should be ordered already.
+	if (right < left) {
+		temp = left;
+		left = right;
+		right = temp;
+	}
+	if (bottom < top) {
+		temp = top;
+		top = bottom;
+		bottom = temp;
+	}
+
+	a = (right - left + 1) / 2;
+	b = (bottom - top + 1) / 2;
+
+	if (!a && !b) {
+		plot(graphics, left, top); // Draw a single pixel
+		return;
+	}
+
+	if (!b) {
+		ugui_graphics_draw_line(graphics,
+		(ugui_point_t) {.y = top, .x = left},
+		(ugui_point_t) {.y = top, .x = right}); // Draw a horizontal line
+		return;
+	}
+
+	if (!a) {
+		ugui_graphics_draw_line(graphics,
+		(ugui_point_t) {.y = left, .x = top},
+		(ugui_point_t) {.y = left, .x = bottom}); // Draw a vertical line
+		return;
+	}
+
+	a2 = a * a;
+	b2 = b * b;
+	two_a2 = a2 << 1;
+	two_b2 = b2 << 1;
+	four_a2 = a2 << 2;
+	four_b2 = b2 << 2;
+	x = 0;
+	y = b;
+	S = a2 * (1 - (b << 1)) + two_b2;
+	T = b2 - two_a2 * ((b << 1) - 1);
+
+	plot(graphics, right + x - a, bottom + y - b);
+	plot(graphics, left - x + a, bottom + y - b);
+	plot(graphics, left - x + a, top - y + b);
+	plot(graphics, right + x - a, top - y + b);
+
+	do {
+		if (S < 0) {
+			S += two_b2 * ((x << 1) + 3);
+			T += four_b2 * (x + 1);
+			x++;
+		} else if (T < 0) {
+			S += two_b2 * ((x << 1) + 3) - four_a2 * (y - 1);
+			T += four_b2 * (x + 1) - two_a2 * ((y << 1) - 3);
+			x++;
+			y--;
+		} else {
+			S -= four_a2 * (y - 1);
+			T -= two_a2 * ((y << 1) - 3);
+			y--;
+		}
+		plot(graphics, right + x - a, bottom + y - b);
+		plot(graphics, left - x + a, bottom + y - b);
+		plot(graphics, left - x + a, top - y + b);
+		plot(graphics, right + x - a, top - y + b);
+	} while (y > 0);
+}
 
 void ugui_graphics_draw_text(ugui_graphics_t graphics, char* text, ugui_font_t font)
 {
