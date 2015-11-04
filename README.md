@@ -16,10 +16,13 @@ If you have any issues or feature requests, feel free to open an issue or a pull
  - Simple to use
    - Minimal API
    - Widgets for common functions
+   - Examples for all components
+   - API documentation?
  - Simple to develop
-   - Object Oriented C with clearly defined modules
+   - Object Oriented C
+   - Clearly defined modules
  - Simple to test
-   - Compiles for any platform (bmp export requires <file.h>)
+   - Compiles for any platform (bmp export requires file.h)
 
 ## Status
 
