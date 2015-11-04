@@ -1,3 +1,8 @@
+/**
+ * Bitmap generator
+ * Generates BMP files from the provided data arrays
+ * This is useful for testing of the graphics framework
+ */
 
 #ifndef BMP_H
 #define BMP_H
