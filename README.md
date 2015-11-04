@@ -1,6 +1,8 @@
 # Micro-GUI (ugui)
 
-Micro-GUI (ugui) is a minimal GUI framework for embedded systems, inspired by the [Pebble](https://getpebble.com) User Interface API (which is seriously great, and you can check out [here](https://developer.getpebble.com/docs/c/User_Interface/).
+Micro-GUI (ugui) is a minimal GUI framework for embedded systems, because there seems to be a lack of open source embedded gui tools, and we should share more.
+
+Heavily inspired by the [Pebble](https://getpebble.com) User Interface API (which is seriously great, and you can check out [here](https://developer.getpebble.com/docs/c/User_Interface/)).
 
 It provides a simple window stack, layers for composition of windows, graphics functions for rendering primitives and text, and widgets to simplify commonly used functions.
 
