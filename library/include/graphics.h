@@ -11,6 +11,8 @@
 extern "C" {
 #endif
 
+/***			Public				***/
+
 typedef void* ugui_font_t;
 
 typedef struct ugui_graphics_s * ugui_graphics_t;
@@ -28,6 +30,13 @@ void ugui_graphics_draw_ellipse(ugui_graphics_t graphics, ugui_rect_t rect);
 void ugui_graphics_draw_text(ugui_graphics_t graphics, char* text, ugui_font_t font);
 
 void ugui_graphics_clear(ugui_graphics_t graphics);
+
+
+/***			Private				***/
+
+void _ugui_graphics_push_layer_ctx(ugui_graphics_t graphics, ugui_rect_t *bounds);
+
+void _ugui_graphics_pop_layer_ctx(ugui_graphics_t graphics, ugui_rect_t *bounds);
 
 #ifdef __cplusplus
 }
