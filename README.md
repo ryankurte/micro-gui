@@ -29,8 +29,8 @@ If you have any issues or feature requests, feel free to open an issue or a pull
  - Window stack / top level interface working
  - Layers mostly working
  - Graphics module 
-   - mostly ignores layers, rendering should be aware of layer context
-   - text rendering not implemented
+   - layer offsets implemented, need to implement bounds
+   - text rendering not (yet) implemented
  - Widgets
    - working on menu, needs text really
    - todo: progress bar, alert/message box
@@ -47,11 +47,15 @@ For an example application see the `example/` folder. This application will upda
 
 ## Credits
 
- - Pebble 
- - Line and Ellipse functions adapted from: 
- - Fonts from: https://github.com/dhepper/font8x8
+ - (Pebble)[https://getpebble.com] for inspiration 
+ - Line and Ellipse functions adapted from (here)[https://www.opengl.org/discussion_boards/showthread.php/168761-Drawing-Line-Bresenhem-midpoint-algorithm]
+ - Fonts from (here) [https://github.com/dhepper/font8x8]
 
 ## License
 
-This project is licensed under the terms of the MIT license.
+This project is experimentally licensed under the terms of the MIT license, because LGPL even with a static linker exception requires you to provide tools to relink your application against the library, which in my opinion is too greater barrier to usage/adoption.
+
+As such, if you make improvements to this library, it would be awesome if you would contribute them back. If that doesn't work, well, we will have to switch to something like the LGPL.
+
 See LICENSE.TXT for more information
+
