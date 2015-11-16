@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Micro-gui : Minial GUI framework for Embedded Systems">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Micro-gui</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/ryankurte/micro-gui">View on GitHub</a>
+
+          <h1 id="project_title">Micro-gui</h1>
+          <h2 id="project_tagline">Minial GUI framework for Embedded Systems</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/ryankurte/micro-gui/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/ryankurte/micro-gui/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a id="micro-gui-ugui" class="anchor" href="#micro-gui-ugui" aria-hidden="true"><span class="octicon octicon-link"></span></a>Micro-GUI (ugui)</h1>
+
+<p>Micro-GUI (ugui) is a minimal GUI framework for embedded systems, because there seems to be a lack of open source embedded gui tools, and we should share more.</p>
+
+<p>Heavily inspired by the <a href="https://getpebble.com">Pebble</a> User Interface API (which is seriously great, and you can check out <a href="https://developer.getpebble.com/docs/c/User_Interface/">here</a>).</p>
+
+<p>It provides a simple window stack, layers for composition of windows, graphics functions for rendering primitives and text, and widgets to simplify commonly used functions.</p>
+
+<p>If you have any issues or feature requests, feel free to open an issue or a pull request. And, if you find yourself using this in a project, I would love to know about it!</p>
+
+<h2>
+<a id="goals" class="anchor" href="#goals" aria-hidden="true"><span class="octicon octicon-link"></span></a>Goals</h2>
+
+<ul>
+<li>Simple to embed
+
+<ul>
+<li>No (or minor) external dependencies</li>
+<li>Permissive licensing (MIT)</li>
+<li>C compliant, doesn't force the use of c++</li>
+</ul>
+</li>
+<li>Simple to use
+
+<ul>
+<li>Minimal API</li>
+<li>Widgets for common functions</li>
+<li>Examples for all components</li>
+<li>API documentation?</li>
+</ul>
+</li>
+<li>Simple to develop
+
+<ul>
+<li>Object Oriented C</li>
+<li>Clearly defined modules</li>
+</ul>
+</li>
+<li>Simple to test
+
+<ul>
+<li>Compiles for any platform (bmp export requires file.h)</li>
+</ul>
+</li>
+</ul>
+
+<h2>
+<a id="status" class="anchor" href="#status" aria-hidden="true"><span class="octicon octicon-link"></span></a>Status</h2>
+
+<ul>
+<li>Window stack / top level interface working</li>
+<li>Layers mostly working</li>
+<li>Graphics module 
+
+<ul>
+<li>layer offsets implemented, need to implement bounds</li>
+<li>text rendering not (yet) implemented</li>
+</ul>
+</li>
+<li>Widgets
+
+<ul>
+<li>working on menu, needs text really</li>
+<li>todo: progress bar, alert/message box</li>
+</ul>
+</li>
+<li>Testing, needs to be implemented (w/ CI)</li>
+<li>Example, would be cool to have a real time window, needs to be simple, though.</li>
+</ul>
+
+<h2>
+<a id="getting-started" class="anchor" href="#getting-started" aria-hidden="true"><span class="octicon octicon-link"></span></a>Getting Started</h2>
+
+<p>TODO</p>
+
+<h2>
+<a id="examples" class="anchor" href="#examples" aria-hidden="true"><span class="octicon octicon-link"></span></a>Examples</h2>
+
+<p>For an example application see the <code>example/</code> folder. This application will update a bmp file each rendering call, and can be interacted with using the command line.</p>
+
+<h2>
+<a id="credits" class="anchor" href="#credits" aria-hidden="true"><span class="octicon octicon-link"></span></a>Credits</h2>
+
+<ul>
+<li>(Pebble)[<a href="https://getpebble.com">https://getpebble.com</a>] for inspiration </li>
+<li>Line and Ellipse functions adapted from (here)[<a href="https://www.opengl.org/discussion_boards/showthread.php/168761-Drawing-Line-Bresenhem-midpoint-algorithm">https://www.opengl.org/discussion_boards/showthread.php/168761-Drawing-Line-Bresenhem-midpoint-algorithm</a>]</li>
+<li>Fonts from (here) [<a href="https://github.com/dhepper/font8x8">https://github.com/dhepper/font8x8</a>]</li>
+</ul>
+
+<h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p>This project is experimentally licensed under the terms of the MIT license, because LGPL even with a static linker exception requires you to provide tools to relink your application against the library, which in my opinion is too greater barrier to usage/adoption.</p>
+
+<p>As such, if you make improvements to this library, it would be awesome if you would contribute them back. If that doesn't work, well, we will have to switch to something like the LGPL.</p>
+
+<p>See LICENSE.TXT for more information</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Micro-gui maintained by <a href="https://github.com/ryankurte">ryankurte</a></p>
+        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
