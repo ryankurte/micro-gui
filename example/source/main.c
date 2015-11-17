@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include <stdbool.h>
 
+#include "SDL2/SDL.h"
+
 #include "ugui.h"
 #include "bmp.h"
 #include "line_window.h"
@@ -62,6 +64,8 @@ void handle_event(ugui_window_t window, int event)
 
 int main(int argc, char *argv[])
 {
+	//SDL_Init( SDL_INIT_EVERYTHING );
+
 	printf("\r\n------------------------------------\r\n");
 	printf("micro-gui (ugui) example application\r\n");
 	printf("Output will appear (while running) in ./test.bmp\r\n");
@@ -97,6 +101,8 @@ int main(int argc, char *argv[])
 	}
 
 	ugui_destroy(gui);
+
+	//SDL_Quit();
 
 	return 0;
 }
