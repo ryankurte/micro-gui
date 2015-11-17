@@ -69,6 +69,7 @@ int main(int argc, char *argv[])
 	printf("\r\n------------------------------------\r\n");
 	printf("micro-gui (ugui) example application\r\n");
 	printf("Output will appear (while running) in ./test.bmp\r\n");
+	//TODO: notes about SDL, make SDL rendering optional arg
 	printf("Use wasd to for directional navigation, q for back, and e for select\r\n");
 	printf("Note that you will need to press enter following each command\r\n");
 
@@ -92,9 +93,36 @@ int main(int argc, char *argv[])
 	ugui_render(gui);
 
 	while (running > 0) {
-		int event = get_input_event();
+		//int event = get_input_event();
+		//ugui_put_event(gui, event);
 
-		ugui_put_event(gui, event);
+		//Handle SDL events
+		SDL_Event event;
+		while (SDL_PollEvent(&event)) {
+			if (event.type == SDL_QUIT) {
+				running = 0;
+			}
+			if (event.type == SDL_KEYDOWN) {
+				switch (event.key.keysym.sym) {
+				case SDLK_UP:
+					ugui_put_event(gui, UGUI_EVT_UP);
+					break;
+				case SDLK_DOWN:
+					ugui_put_event(gui, UGUI_EVT_DOWN);
+					break;
+				case SDLK_LEFT:
+					ugui_put_event(gui, UGUI_EVT_LEFT);
+					break;
+				case SDLK_RIGHT:
+					ugui_put_event(gui, UGUI_EVT_RIGHT);
+					break;
+				case SDLK_ESCAPE:
+				case SDLK_q:
+					running = 0;
+					break;
+				}
+			}
+		}
 
 		ugui_render(gui);
 
@@ -112,6 +140,8 @@ int main(int argc, char *argv[])
 		SDL_DestroyTexture(tex);
 
 		SDL_FreeSurface(bmp);
+
+		usleep(1000);
 	}
 
 	ugui_destroy(gui);
