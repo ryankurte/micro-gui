@@ -57,20 +57,23 @@ void handle_event(ugui_window_t window, int event)
 	} else if (event == UGUI_EVT_UP) {
 		ugui_window_stack_pop(gui);
 		ugui_window_stack_push(gui, layer_test_window);
-	} else if(event == UGUI_EVT_BACK) {
+	} else if (event == UGUI_EVT_BACK) {
 		running = 0;
 	}
 }
 
 int main(int argc, char *argv[])
 {
-	//SDL_Init( SDL_INIT_EVERYTHING );
+	SDL_Init( SDL_INIT_EVERYTHING );
 
 	printf("\r\n------------------------------------\r\n");
 	printf("micro-gui (ugui) example application\r\n");
 	printf("Output will appear (while running) in ./test.bmp\r\n");
 	printf("Use wasd to for directional navigation, q for back, and e for select\r\n");
 	printf("Note that you will need to press enter following each command\r\n");
+
+	SDL_Window *win = SDL_CreateWindow("micro-gui example", 100, 100, 640, 480, SDL_WINDOW_SHOWN);
+	SDL_Renderer *ren = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 
 	gui = ugui_create(GUI_WIDTH, GUI_HEIGHT);
 	running = 1;
@@ -98,11 +101,25 @@ int main(int argc, char *argv[])
 		bool *img = ugui_get_image(gui);
 
 		bmp_create("test.bmp", GUI_WIDTH, GUI_HEIGHT, (bool*)img);
+
+		SDL_Surface *bmp = SDL_LoadBMP("test.bmp");
+		SDL_Texture *tex = SDL_CreateTextureFromSurface(ren, bmp);
+
+		SDL_RenderClear(ren);
+		SDL_RenderCopy(ren, tex, NULL, NULL);
+		SDL_RenderPresent(ren);
+
+		SDL_DestroyTexture(tex);
+
+		SDL_FreeSurface(bmp);
 	}
 
 	ugui_destroy(gui);
 
-	//SDL_Quit();
+	SDL_DestroyRenderer(ren);
+	SDL_DestroyWindow(win);
+
+	SDL_Quit();
 
 	return 0;
 }
