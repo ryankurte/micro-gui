@@ -29,6 +29,10 @@ ugui_layer_t ugui_layer_create(ugui_rect_t bounds)
 
 	layer->update = NULL;
 
+	for(int i=0; i<UGUI_LAYER_MAX_CHILDREN; i++) {
+		layer->children[i] = 0;
+	}
+
 	return layer;
 }
 
