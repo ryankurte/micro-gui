@@ -224,9 +224,18 @@ void ugui_graphics_draw_ellipse(ugui_graphics_t graphics, ugui_rect_t rect)
 	} while (y > 0);
 }
 
-void ugui_graphics_draw_text(ugui_graphics_t graphics, char* text, ugui_font_t font)
+void ugui_graphics_draw_sprite(ugui_graphics_t graphics, ugui_sprite_t sprite, ugui_point_t point)
 {
+	for(int y=0; y<sprite.h; y++) {
+		for(int x=0; x<sprite.w; x++) {
+			plot(graphics, point.x + x, point.y + y);
+		}
+	}
+}
 
+void ugui_graphics_draw_text(ugui_graphics_t graphics, char* text, ugui_font_t font, ugui_point_t point)
+{
+	
 }
 
 void _ugui_graphics_push_layer_ctx(ugui_graphics_t graphics, ugui_rect_t* bounds)
