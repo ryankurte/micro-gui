@@ -9,7 +9,7 @@
 /***			Public				***/
 
 struct ugui_window_s {
-	ugui_layer_t base_layer;
+	ugui_layer_t* base_layer;
 	ugui_window_handlers_t handlers;
 	ugui_window_event_handler_t on_event;
 };
@@ -29,7 +29,7 @@ ugui_window_t* ugui_window_create(uint32_t w, uint32_t h)
 	return window;
 }
 
-ugui_layer_t ugui_window_get_base_layer(ugui_window_t* window)
+ugui_layer_t* ugui_window_get_base_layer(ugui_window_t* window)
 {
 	return window->base_layer;
 }
@@ -73,7 +73,7 @@ void _ugui_window_put_event(ugui_window_t *window, int event)
 void _ugui_window_update(ugui_window_t *window, void* graphics_ctx)
 {
 	//Render base layer
-	ugui_layer_t base_layer = window->base_layer;
+	ugui_layer_t* base_layer = window->base_layer;
 	_ugui_layer_update(base_layer, graphics_ctx);
 }
 

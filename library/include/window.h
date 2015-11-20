@@ -25,7 +25,7 @@ ugui_window_t *ugui_window_create();
 
 void ugui_window_destroy(ugui_window_t *window);
 
-ugui_layer_t ugui_window_get_base_layer(ugui_window_t *window);
+ugui_layer_t* ugui_window_get_base_layer(ugui_window_t *window);
 
 void ugui_window_set_window_handlers(ugui_window_t *window, ugui_window_handlers_t *handlers);
 

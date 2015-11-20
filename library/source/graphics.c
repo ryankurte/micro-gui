@@ -30,9 +30,9 @@ struct ugui_graphics_s {
 	uint32_t limit_h;
 };
 
-ugui_graphics_t ugui_graphics_create(uint32_t w, uint32_t h, bool* buffer)
+ugui_graphics_t* ugui_graphics_create(uint32_t w, uint32_t h, bool* buffer)
 {
-	ugui_graphics_t graphics = malloc(sizeof(struct ugui_graphics_s));
+	ugui_graphics_t* graphics = malloc(sizeof(struct ugui_graphics_s));
 
 	graphics->w = w;
 	graphics->h = h;
@@ -46,7 +46,7 @@ ugui_graphics_t ugui_graphics_create(uint32_t w, uint32_t h, bool* buffer)
 	return graphics;
 }
 
-void ugui_graphics_destroy(ugui_graphics_t graphics)
+void ugui_graphics_destroy(ugui_graphics_t* graphics)
 {
 	free(graphics);
 }
@@ -59,7 +59,7 @@ void ugui_graphics_destroy(ugui_graphics_t graphics)
  * @param x [description]
  * @param y [description]
  */
-static void plot(ugui_graphics_t graphics, uint32_t x, uint32_t y)
+static void plot(ugui_graphics_t* graphics, uint32_t x, uint32_t y)
 {
 	//Calculate offsets
 	uint32_t new_x = x + graphics->offset_x;
@@ -72,14 +72,14 @@ static void plot(ugui_graphics_t graphics, uint32_t x, uint32_t y)
 	}
 }
 
-void ugui_graphics_clear(ugui_graphics_t graphics)
+void ugui_graphics_clear(ugui_graphics_t* graphics)
 {
 	for (int i = 0; i < (graphics->h * graphics->w); i++) {
 		graphics->buffer[i] = 0;
 	}
 }
 
-void ugui_graphics_draw_line(ugui_graphics_t graphics, ugui_point_t a, ugui_point_t b)
+void ugui_graphics_draw_line(ugui_graphics_t* graphics, ugui_point_t a, ugui_point_t b)
 {
 	//Bresenham's line algorithm (https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm), implementation from:
 	//https://www.opengl.org/discussion_boards/showthread.php/168761-Drawing-Line-Bresenhem-midpoint-algorithm
@@ -136,7 +136,7 @@ void ugui_graphics_draw_line(ugui_graphics_t graphics, ugui_point_t a, ugui_poin
 	}
 }
 
-void ugui_graphics_draw_ellipse(ugui_graphics_t graphics, ugui_rect_t rect)
+void ugui_graphics_draw_ellipse(ugui_graphics_t* graphics, ugui_rect_t rect)
 {
 	//Implementation also from:
 	//https://www.opengl.org/discussion_boards/showthread.php/168761-Drawing-Line-Bresenhem-midpoint-algorithm
@@ -224,7 +224,7 @@ void ugui_graphics_draw_ellipse(ugui_graphics_t graphics, ugui_rect_t rect)
 	} while (y > 0);
 }
 
-void ugui_graphics_draw_sprite(ugui_graphics_t graphics, ugui_sprite_t sprite, ugui_point_t point)
+void ugui_graphics_draw_sprite(ugui_graphics_t* graphics, ugui_sprite_t sprite, ugui_point_t point)
 {
 	for(int y=0; y<sprite.h; y++) {
 		for(int x=0; x<sprite.w; x++) {
@@ -233,12 +233,12 @@ void ugui_graphics_draw_sprite(ugui_graphics_t graphics, ugui_sprite_t sprite, u
 	}
 }
 
-void ugui_graphics_draw_text(ugui_graphics_t graphics, char* text, ugui_font_t font, ugui_point_t point)
+void ugui_graphics_draw_text(ugui_graphics_t* graphics, char* text, ugui_font_t font, ugui_point_t point)
 {
 	
 }
 
-void _ugui_graphics_push_layer_ctx(ugui_graphics_t graphics, ugui_rect_t* bounds)
+void _ugui_graphics_push_layer_ctx(ugui_graphics_t* graphics, ugui_rect_t* bounds)
 {
 	graphics->offset_y += bounds->y;
 	graphics->offset_x += bounds->x;
@@ -253,7 +253,7 @@ void _ugui_graphics_push_layer_ctx(ugui_graphics_t graphics, ugui_rect_t* bounds
 	       graphics->limit_h);
 }
 
-void _ugui_graphics_pop_layer_ctx(ugui_graphics_t graphics, ugui_rect_t* bounds)
+void _ugui_graphics_pop_layer_ctx(ugui_graphics_t* graphics, ugui_rect_t* bounds)
 {
 	graphics->offset_y -= bounds->y;
 	graphics->offset_x -= bounds->x;

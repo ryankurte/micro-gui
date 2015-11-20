@@ -2,12 +2,12 @@
 #include "ugui.h"
 
 ugui_window_t *layer_example_window;
-ugui_layer_t quadrant_layers[4];
+ugui_layer_t* quadrant_layers[4];
 
 
 /***			Internal Functions				***/
 
-static void quadrant_layer_update(ugui_layer_t layer, void* graphics_ctx)
+static void quadrant_layer_update(ugui_layer_t* layer, void* graphics_ctx)
 {
 	ugui_rect_t* bounds = ugui_layer_get_bounds(layer);
 
@@ -43,7 +43,7 @@ ugui_window_t* layer_window_create(uint32_t w, uint32_t h)
 {
 	layer_example_window = ugui_window_create(w, h);
 
-	ugui_layer_t base_layer = ugui_window_get_base_layer(layer_example_window);
+	ugui_layer_t* base_layer = ugui_window_get_base_layer(layer_example_window);
 
 	for (int i = 0; i < 2; i++) {
 		for (int j = 0; j < 2; j++) {

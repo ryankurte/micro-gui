@@ -13,10 +13,10 @@
 #define GUI_WIDTH	640
 #define GUI_HEIGHT	480
 
-ugui_t gui;
-ugui_window_t *line_test_window;
-ugui_window_t *circle_test_window;
-ugui_window_t *layer_test_window;
+ugui_t* gui;
+ugui_window_t* line_test_window;
+ugui_window_t* circle_test_window;
+ugui_window_t* layer_test_window;
 int running;
 
 int get_input_event()
