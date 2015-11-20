@@ -1,7 +1,7 @@
 
 #include "ugui.h"
 
-ugui_window_t line_window;
+ugui_window_t *line_window;
 ugui_layer_t line_layer;
 
 
@@ -61,7 +61,7 @@ static void line_layer_update(ugui_layer_t layer, void* graphics_ctx)
 
 /***			External Functions				***/
 
-ugui_window_t line_window_create(uint32_t w, uint32_t h)
+ugui_window_t *line_window_create(uint32_t w, uint32_t h)
 {
 	line_window = ugui_window_create(w, h);
 

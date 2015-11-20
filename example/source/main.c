@@ -11,11 +11,12 @@
 #define GUI_HEIGHT	480
 
 ugui_t gui;
-ugui_window_t line_test_window;
-ugui_window_t circle_test_window;
+ugui_window_t *line_test_window;
+ugui_window_t *circle_test_window;
 int running;
 
-int get_input_event() {
+int get_input_event()
+{
 	int event = UGUI_EVT_NONE;
 	int input = getchar();
 	switch (input) {
@@ -42,7 +43,7 @@ int get_input_event() {
 	return event;
 }
 
-void handle_event(ugui_window_t window, int event)
+void handle_event(ugui_window_t* window, int event)
 {
 	if (event == UGUI_EVT_RIGHT) {
 		ugui_window_stack_pop(gui);
@@ -50,7 +51,7 @@ void handle_event(ugui_window_t window, int event)
 	} else if (event == UGUI_EVT_LEFT) {
 		ugui_window_stack_pop(gui);
 		ugui_window_stack_push(gui, line_test_window);
-	} else if(event == UGUI_EVT_BACK) {
+	} else if (event == UGUI_EVT_BACK) {
 		running = 0;
 	}
 }

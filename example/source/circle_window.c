@@ -1,7 +1,7 @@
 
 #include "ugui.h"
 
-ugui_window_t circle_window;
+ugui_window_t *circle_window;
 ugui_layer_t circle_layer;
 
 
@@ -32,7 +32,7 @@ static void circle_layer_update(ugui_layer_t layer, void* graphics_ctx)
 
 /***			External Functions				***/
 
-ugui_window_t circle_window_create(uint32_t w, uint32_t h)
+ugui_window_t *circle_window_create(uint32_t w, uint32_t h)
 {
 	circle_window = ugui_window_create(w, h);
 
