@@ -57,7 +57,7 @@ void ugui_put_event(ugui_t gui, uint8_t event)
 void ugui_render(ugui_t gui)
 {
 	//TODO: render only if dirty..?
-	//Think about how layers work & offset rendering in update calls
+	//TODO: Think about how layers work & offset rendering in update calls
 	ugui_graphics_clear(gui->graphics);
 	ugui_window_t *current = gui->windows[gui->window_index - 1];
 	_ugui_window_update(current, gui->graphics);

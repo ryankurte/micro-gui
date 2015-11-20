@@ -7,13 +7,27 @@
 
 #include <assert.h>
 
+#include "layer.h"
+
 #define ABS(x)	(x < 0 ? -x : x)
 #define SIGN(x)	(x < 0 ? -1 : (x > 0 ? 1 : 0))
+
+#ifdef DEBUG_GRAPHICS
+#include <stdio.h>
+#define GRAPHICS_PRINT(...) printf(__VA_ARGS__)
+#else
+#define GRAPHICS_PRINT(...) 
+#endif
 
 struct ugui_graphics_s {
 	uint32_t w;
 	uint32_t h;
 	bool* buffer;
+
+	uint32_t offset_x;
+	uint32_t offset_y;
+	uint32_t limit_w;
+	uint32_t limit_h;
 };
 
 ugui_graphics_t ugui_graphics_create(uint32_t w, uint32_t h, bool* buffer)
@@ -24,6 +38,11 @@ ugui_graphics_t ugui_graphics_create(uint32_t w, uint32_t h, bool* buffer)
 	graphics->h = h;
 	graphics->buffer = buffer;
 
+	graphics->offset_x = 0;
+	graphics->offset_y = 0;
+	graphics->limit_w = w;
+	graphics->limit_h = h;
+
 	return graphics;
 }
 
@@ -32,10 +51,24 @@ void ugui_graphics_destroy(ugui_graphics_t graphics)
 	free(graphics);
 }
 
+/**
+ * @brief Internal function to plot a point
+ * @details This performs bounds checking and translation based on the graphics context
+ *
+ * @param graphics [description]
+ * @param x [description]
+ * @param y [description]
+ */
 static void plot(ugui_graphics_t graphics, uint32_t x, uint32_t y)
 {
-	if ((x < graphics->w) && (y < graphics->h)) {
-		graphics->buffer[y * graphics->w + x] = 1;
+	//Calculate offsets
+	uint32_t new_x = x + graphics->offset_x;
+	uint32_t new_y = y + graphics->offset_y;
+
+	//Draw point if within graphics buffer and layer bounds
+	if ((new_x < graphics->w) && (x < graphics->limit_w)
+	        && (new_y < graphics->h) && (y < graphics->limit_h)) {
+		graphics->buffer[new_y * graphics->w + new_x] = 1;
 	}
 }
 
@@ -191,8 +224,46 @@ void ugui_graphics_draw_ellipse(ugui_graphics_t graphics, ugui_rect_t rect)
 	} while (y > 0);
 }
 
-void ugui_graphics_draw_text(ugui_graphics_t graphics, char* text, ugui_font_t font)
+void ugui_graphics_draw_sprite(ugui_graphics_t graphics, ugui_sprite_t sprite, ugui_point_t point)
 {
-
+	for(int y=0; y<sprite.h; y++) {
+		for(int x=0; x<sprite.w; x++) {
+			plot(graphics, point.x + x, point.y + y);
+		}
+	}
 }
 
+void ugui_graphics_draw_text(ugui_graphics_t graphics, char* text, ugui_font_t font, ugui_point_t point)
+{
+	
+}
+
+void _ugui_graphics_push_layer_ctx(ugui_graphics_t graphics, ugui_rect_t* bounds)
+{
+	graphics->offset_y += bounds->y;
+	graphics->offset_x += bounds->x;
+	//TODO: implement layer bounds. May need a layer stack :-/
+	//graphics->limit_w = bounds->w;
+	//graphics->limit_h = bounds->h;
+
+	GRAPHICS_PRINT("Graphics - push context (x: %d, y: %d, w: %d, h: %d\r\n",
+	       graphics->offset_y,
+	       graphics->offset_x,
+	       graphics->limit_w,
+	       graphics->limit_h);
+}
+
+void _ugui_graphics_pop_layer_ctx(ugui_graphics_t graphics, ugui_rect_t* bounds)
+{
+	graphics->offset_y -= bounds->y;
+	graphics->offset_x -= bounds->x;
+	//TODO: implement layer bounds. May need a layer stack :-/
+	//graphics->limit_w = bounds->w;
+	//graphics->limit_h = bounds->h;
+
+	GRAPHICS_PRINT("Graphics - pop context (x: %d, y: %d, w: %d, h: %d\r\n",
+	       graphics->offset_y,
+	       graphics->offset_x,
+	       graphics->limit_w,
+	       graphics->limit_h);
+}

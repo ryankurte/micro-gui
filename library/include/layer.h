@@ -10,6 +10,8 @@
 extern "C" {
 #endif
 
+/***			Public				***/
+
 typedef struct ugui_layer_s* ugui_layer_t;
 
 typedef void (*ugui_layer_update_t)(ugui_layer_t layer, void *gctx);
@@ -25,6 +27,9 @@ int32_t ugui_layer_add_child(ugui_layer_t layer, ugui_layer_t child);
 void ugui_layer_set_update(ugui_layer_t layer, ugui_layer_update_t update);
 
 void ugui_layer_set_dirty(ugui_layer_t layer);
+
+
+/***			Private				***/
 
 int _ugui_layer_update(ugui_layer_t layer, void* graphics_ctx);
 
