@@ -1,13 +1,13 @@
 
 #include "ugui.h"
 
-ugui_window_t circle_window;
-ugui_layer_t circle_layer;
+ugui_window_t *circle_window;
+ugui_layer_t* circle_layer;
 
 
 /***			Internal Functions				***/
 
-static void circle_layer_update(ugui_layer_t layer, void* graphics_ctx)
+static void circle_layer_update(ugui_layer_t* layer, void* graphics_ctx)
 {
 	ugui_rect_t* bounds = ugui_layer_get_bounds(layer);
 
@@ -32,13 +32,13 @@ static void circle_layer_update(ugui_layer_t layer, void* graphics_ctx)
 
 /***			External Functions				***/
 
-ugui_window_t circle_window_create(uint32_t w, uint32_t h)
+ugui_window_t *circle_window_create(uint32_t w, uint32_t h)
 {
 	circle_window = ugui_window_create(w, h);
 
 	circle_layer = ugui_layer_create((ugui_rect_t) {.x = 0, .y = 0, .w = w, .h = h});
 
-	ugui_layer_t base_layer = ugui_window_get_base_layer(circle_window);
+	ugui_layer_t* base_layer = ugui_window_get_base_layer(circle_window);
 
 	ugui_layer_set_update(circle_layer, circle_layer_update);
 

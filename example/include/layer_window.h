@@ -5,7 +5,7 @@
 #include "ugui.h"
 #include <stdint.h>
 
-ugui_window_t layer_window_create(uint32_t w, uint32_t h);
+ugui_window_t *layer_window_create(uint32_t w, uint32_t h);
 void layer_window_destroy();
 
 #endif

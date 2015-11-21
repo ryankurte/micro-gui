@@ -5,7 +5,7 @@
 #include "ugui.h"
 #include <stdint.h>
 
-ugui_window_t line_window_create(uint32_t w, uint32_t h);
+ugui_window_t* line_window_create(uint32_t w, uint32_t h);
 void line_window_destroy();
 
 #endif

@@ -1,13 +1,13 @@
 
 #include "ugui.h"
 
-ugui_window_t line_window;
-ugui_layer_t line_layer;
+ugui_window_t *line_window;
+ugui_layer_t* line_layer;
 
 
 /***			Internal Functions				***/
 
-static void line_layer_update(ugui_layer_t layer, void* graphics_ctx)
+static void line_layer_update(ugui_layer_t* layer, void* graphics_ctx)
 {
 	ugui_rect_t* bounds = ugui_layer_get_bounds(layer);
 
@@ -61,13 +61,13 @@ static void line_layer_update(ugui_layer_t layer, void* graphics_ctx)
 
 /***			External Functions				***/
 
-ugui_window_t line_window_create(uint32_t w, uint32_t h)
+ugui_window_t *line_window_create(uint32_t w, uint32_t h)
 {
 	line_window = ugui_window_create(w, h);
 
 	line_layer = ugui_layer_create((ugui_rect_t) {.x = 0, .y = 0, .w = w, .h = h});
 
-	ugui_layer_t base_layer = ugui_window_get_base_layer(line_window);
+	ugui_layer_t* base_layer = ugui_window_get_base_layer(line_window);
 
 	ugui_layer_set_update(line_layer, line_layer_update);
 
