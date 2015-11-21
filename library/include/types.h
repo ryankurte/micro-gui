@@ -16,6 +16,11 @@ typedef struct ugui_point_s {
 	uint16_t y;
 } ugui_point_t;
 
+typedef struct ugui_size_s {
+	uint16_t w;
+	uint16_t h;
+} ugui_size_t;
+
 typedef struct ugui_rect_s {
 	uint16_t x;
 	uint16_t y;

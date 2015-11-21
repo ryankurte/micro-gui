@@ -16,7 +16,7 @@
 #include <stdio.h>
 #define GRAPHICS_PRINT(...) printf(__VA_ARGS__)
 #else
-#define GRAPHICS_PRINT(...) 
+#define GRAPHICS_PRINT(...)
 #endif
 
 struct ugui_graphics_s {
@@ -76,6 +76,32 @@ void ugui_graphics_clear(ugui_graphics_t graphics)
 {
 	for (int i = 0; i < (graphics->h * graphics->w); i++) {
 		graphics->buffer[i] = 0;
+	}
+}
+
+void ugui_graphics_draw_rect(ugui_graphics_t graphics, ugui_point_t a, ugui_size_t size)
+{
+	//Horizontal lines
+	for (int i = 0; i < size.w; i++) {
+		plot(graphics, a.x + i, a.y);
+		plot(graphics, a.x + i, a.y + size.h);
+	}
+
+	//Vertical lines
+	for (int j = 0; j < size.h; j++) {
+		plot(graphics, a.x, a.y + j);
+		plot(graphics, a.x + size.w, a.y + j);
+	}
+}
+
+void ugui_graphics_fill_rect(ugui_graphics_t graphics, ugui_point_t a, ugui_size_t size)
+{
+	//Horizontal lines
+	for (int i = 0; i < size.h; i++) {
+		for (int j = 0; j < size.w; j++) {
+			plot(graphics, a.x + j, a.y + i);
+			plot(graphics, a.x + j, a.y + i);
+		}
 	}
 }
 
@@ -226,8 +252,8 @@ void ugui_graphics_draw_ellipse(ugui_graphics_t graphics, ugui_rect_t rect)
 
 void ugui_graphics_draw_sprite(ugui_graphics_t graphics, ugui_sprite_t sprite, ugui_point_t point)
 {
-	for(int y=0; y<sprite.h; y++) {
-		for(int x=0; x<sprite.w; x++) {
+	for (int y = 0; y < sprite.h; y++) {
+		for (int x = 0; x < sprite.w; x++) {
 			plot(graphics, point.x + x, point.y + y);
 		}
 	}
@@ -235,7 +261,7 @@ void ugui_graphics_draw_sprite(ugui_graphics_t graphics, ugui_sprite_t sprite, u
 
 void ugui_graphics_draw_text(ugui_graphics_t graphics, char* text, ugui_font_t font, ugui_point_t point)
 {
-	
+
 }
 
 void _ugui_graphics_push_layer_ctx(ugui_graphics_t graphics, ugui_rect_t* bounds)
@@ -247,10 +273,10 @@ void _ugui_graphics_push_layer_ctx(ugui_graphics_t graphics, ugui_rect_t* bounds
 	//graphics->limit_h = bounds->h;
 
 	GRAPHICS_PRINT("Graphics - push context (x: %d, y: %d, w: %d, h: %d\r\n",
-	       graphics->offset_y,
-	       graphics->offset_x,
-	       graphics->limit_w,
-	       graphics->limit_h);
+	               graphics->offset_y,
+	               graphics->offset_x,
+	               graphics->limit_w,
+	               graphics->limit_h);
 }
 
 void _ugui_graphics_pop_layer_ctx(ugui_graphics_t graphics, ugui_rect_t* bounds)
@@ -262,8 +288,8 @@ void _ugui_graphics_pop_layer_ctx(ugui_graphics_t graphics, ugui_rect_t* bounds)
 	//graphics->limit_h = bounds->h;
 
 	GRAPHICS_PRINT("Graphics - pop context (x: %d, y: %d, w: %d, h: %d\r\n",
-	       graphics->offset_y,
-	       graphics->offset_x,
-	       graphics->limit_w,
-	       graphics->limit_h);
+	               graphics->offset_y,
+	               graphics->offset_x,
+	               graphics->limit_w,
+	               graphics->limit_h);
 }
