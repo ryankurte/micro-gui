@@ -1,6 +1,8 @@
 
 #include "ugui.h"
 
+#include "font.h"
+
 ugui_window_t *line_window;
 ugui_layer_t* line_layer;
 
@@ -54,6 +56,13 @@ static void line_layer_update(ugui_layer_t* layer, void* graphics_ctx)
 		.x = w / 2, .y = h - 1
 	}, (ugui_point_t) {
 		.x = w - 1, .y = 0
+	});
+
+	ugui_graphics_draw_text(graphics_ctx,
+	                        "test",
+	                        &font_robotomono_regular_18,
+	(ugui_point_t) {
+		.x = w / 2, .y = h / 2
 	});
 
 	ugui_layer_set_dirty(layer);

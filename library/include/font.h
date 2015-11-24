@@ -13,10 +13,12 @@
  */
 
 
-#ifndef FONTLIBRARY_H_
-#define FONTLIBRARY_H_
+#ifndef FONT_H_
+#define FONT_H_
 
 #include <stdint.h>
+
+#include "types.h"
 
 //Struct encapsulating a font style
 typedef struct font_style_s
@@ -33,5 +35,8 @@ typedef struct font_style_s
 
 extern font_style_t font_robotomono_regular_16;
 extern font_style_t font_robotomono_regular_18;
+
+int _ugui_font_get_glyph(font_style_t *font, char c, ugui_sprite_t* glyph) ;
+
 
 #endif

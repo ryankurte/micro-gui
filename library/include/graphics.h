@@ -6,6 +6,7 @@
 #include <stdbool.h>
 
 #include "types.h"
+#include "font.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -29,7 +30,7 @@ void ugui_graphics_draw_ellipse(ugui_graphics_t* graphics, ugui_rect_t rect);
 
 void ugui_graphics_draw_sprite(ugui_graphics_t* graphics, ugui_sprite_t sprite, ugui_point_t point);
 
-void ugui_graphics_draw_text(ugui_graphics_t* graphics, char* text, ugui_font_t font, ugui_point_t point);
+void ugui_graphics_draw_text(ugui_graphics_t* graphics, char* text, font_style_t* font, ugui_point_t point);
 
 void ugui_graphics_clear(ugui_graphics_t* graphics);
 

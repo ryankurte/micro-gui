@@ -4,10 +4,12 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <stdbool.h>
+#include <string.h>
 
 #include <assert.h>
 
 #include "layer.h"
+#include "font.h"
 
 #define ABS(x)	(x < 0 ? -x : x)
 #define SIGN(x)	(x < 0 ? -1 : (x > 0 ? 1 : 0))
@@ -259,8 +261,18 @@ void ugui_graphics_draw_sprite(ugui_graphics_t* graphics, ugui_sprite_t sprite, 
 	}
 }
 
-void ugui_graphics_draw_text(ugui_graphics_t* graphics, char* text, ugui_font_t font, ugui_point_t point)
+void ugui_graphics_draw_text(ugui_graphics_t* graphics, char* text, font_style_t* font, ugui_point_t point)
 {
+	uint16_t length = strlen(text);
+	ugui_sprite_t sprite;
+
+
+	for(uint16_t i=0; i<length; i++) {
+		char c = text[i];
+		_ugui_font_get_glyph(font, c, &sprite);
+		ugui_graphics_draw_sprite(graphics, sprite, point);
+		point.x += sprite.w;
+	}
 
 }
 
