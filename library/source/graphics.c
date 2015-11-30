@@ -24,7 +24,7 @@
 struct ugui_graphics_s {
 	uint32_t w;
 	uint32_t h;
-	bool* buffer;
+	ugui_buffer_t* buffer;
 
 	uint32_t offset_x;
 	uint32_t offset_y;
@@ -32,7 +32,7 @@ struct ugui_graphics_s {
 	uint32_t limit_h;
 };
 
-ugui_graphics_t* ugui_graphics_create(uint32_t w, uint32_t h, bool* buffer)
+ugui_graphics_t* ugui_graphics_create(uint32_t w, uint32_t h, ugui_buffer_t* buffer)
 {
 	ugui_graphics_t* graphics = malloc(sizeof(struct ugui_graphics_s));
 
@@ -70,15 +70,16 @@ static void plot(ugui_graphics_t* graphics, uint32_t x, uint32_t y)
 	//Draw point if within graphics buffer and layer bounds
 	if ((new_x < graphics->w) && (x < graphics->limit_w)
 	        && (new_y < graphics->h) && (y < graphics->limit_h)) {
-		graphics->buffer[new_y * graphics->w + new_x] = 1;
+		_ugui_buffer_set(graphics->buffer, &(ugui_point_t) {
+			.x = new_x, .y = new_y
+		}, 1);
 	}
+
 }
 
 void ugui_graphics_clear(ugui_graphics_t* graphics)
 {
-	for (int i = 0; i < (graphics->h * graphics->w); i++) {
-		graphics->buffer[i] = 0;
-	}
+	_ugui_buffer_clear(graphics->buffer);
 }
 
 void ugui_graphics_draw_rect(ugui_graphics_t *graphics, ugui_point_t a, ugui_size_t size)
@@ -267,7 +268,7 @@ void ugui_graphics_draw_text(ugui_graphics_t* graphics, char* text, font_style_t
 	ugui_sprite_t sprite;
 
 
-	for(uint16_t i=0; i<length; i++) {
+	for (uint16_t i = 0; i < length; i++) {
 		char c = text[i];
 		_ugui_font_get_glyph(font, c, &sprite);
 		ugui_graphics_draw_sprite(graphics, sprite, point);

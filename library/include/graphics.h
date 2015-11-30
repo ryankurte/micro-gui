@@ -8,6 +8,8 @@
 #include "types.h"
 #include "font.h"
 
+#include "buffer.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -16,7 +18,7 @@ extern "C" {
 
 typedef struct ugui_graphics_s ugui_graphics_t;
 
-ugui_graphics_t* ugui_graphics_create(uint32_t w, uint32_t h, bool* buffer);
+ugui_graphics_t* ugui_graphics_create(uint32_t w, uint32_t h, ugui_buffer_t* buffer);
 
 void ugui_graphics_destroy(ugui_graphics_t* graphics);
 

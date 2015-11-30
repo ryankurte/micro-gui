@@ -6,11 +6,12 @@
 #include <stdbool.h>
 
 #include "graphics.h"
+#include "buffer.h"
 
 struct ugui_s {
 	uint32_t w;
 	uint32_t h;
-	bool* buffer;
+	ugui_buffer_t* buffer;
 	ugui_graphics_t* graphics;
 	ugui_window_t *windows[UGUI_MAX_WINDOW_DEPTH];
 	uint32_t window_index;
@@ -20,7 +21,7 @@ ugui_t* ugui_create(uint32_t w, uint32_t h)
 {
 	ugui_t* gui = malloc(sizeof(struct ugui_s));
 
-	gui->buffer = malloc(w * h / sizeof(uint8_t) + 1);
+	gui->buffer = _ugui_buffer_create(w, h, 1);
 
 	gui->w = w;
 	gui->h = h;
@@ -42,9 +43,9 @@ void ugui_destroy(ugui_t* gui)
 	free(gui);
 }
 
-bool* ugui_get_image(ugui_t* gui)
+uint8_t* ugui_get_image(ugui_t* gui)
 {
-	return gui->buffer;
+	return _ugui_buffer_get_data(gui->buffer);
 }
 
 void ugui_put_event(ugui_t* gui, uint8_t event)
