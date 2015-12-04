@@ -31,7 +31,8 @@ typedef struct ugui_rect_s {
 typedef struct ugui_sprite_s {
 	uint16_t w;
 	uint16_t h;
-	ugui_pixel_t* data;
+	uint16_t w_bytes;
+	uint8_t* data;
 } ugui_sprite_t;
 
 typedef struct ugui_font_s {

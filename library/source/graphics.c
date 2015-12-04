@@ -257,7 +257,11 @@ void ugui_graphics_draw_sprite(ugui_graphics_t* graphics, ugui_sprite_t sprite, 
 {
 	for (int y = 0; y < sprite.h; y++) {
 		for (int x = 0; x < sprite.w; x++) {
-			plot(graphics, point.x + x, point.y + y);
+			ugui_pixel_t pixel;
+			_ugui_glyph_get_pixel(&sprite, x, y, &pixel);
+			if(pixel) {
+				plot(graphics, point.x + x, point.y + y);
+			}
 		}
 	}
 }

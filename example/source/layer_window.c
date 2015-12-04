@@ -29,7 +29,7 @@ static void quadrant_layer_update(ugui_layer_t* layer, void* graphics_ctx)
 	uint8_t fake_data[] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
 
 	ugui_graphics_draw_sprite(graphics_ctx, (ugui_sprite_t) {
-		.w = 8, .h = 8, .data = (bool*)fake_data
+		.w = 8, .h = 8, .data = fake_data
 	}, (ugui_point_t) {
 		.x = w / 2 - 4, .y = h / 2 - 4
 	});

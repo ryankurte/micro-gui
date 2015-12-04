@@ -37,9 +37,26 @@ int _ugui_font_get_glyph(font_style_t *font, char c, ugui_sprite_t* glyph)
 	//TODO: either make this more efficient or remove and use only fixed width
 	uint16_t offset = index * font->glyph_height * font->glyph_width_bytes;
 
-	glyph->w = 16;
-	glyph->h = 15;
-	glyph->data = (ugui_pixel_t*)test_arr;
+	glyph->w_bytes = font->glyph_width_bytes;
+	glyph->h = font->glyph_height;
+	glyph->w = font->glyph_width[index];
+	glyph->data = font->glyph_bitmaps + font->glyph_height * font->glyph_width_bytes * index;
+
+	return 1;
+}
+
+//Function depends on b/w or color implementation
+//Should not be here
+uint8_t _ugui_glyph_get_pixel(ugui_sprite_t *sprite, uint16_t x, uint16_t y, ugui_pixel_t* pixel)
+{
+	if((x < 0) || (x > sprite->w) || (y < 0) || (y > sprite->h)) {
+		return 0;
+	}
+
+	uint8_t byte = sprite->data[y * sprite->w_bytes + x / 8];
+	uint8_t mask = 1 << (x % 8);
+
+	*pixel = (bool)((byte & mask) != 0);
 
 	return 1;
 }
