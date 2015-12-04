@@ -16,7 +16,7 @@
 extern "C" {
 #endif
 
-int bmp_create(char* filename, uint32_t w, uint32_t h, bool* data);
+int bmp_create_bw(char* filename, uint32_t w, uint32_t h, uint8_t* data);
 
 #ifdef __cplusplus
 }

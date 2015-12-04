@@ -1,6 +1,6 @@
 
-#ifndef PIXELBUFFER_H
-#define PIXELBUFFER_H
+#ifndef UGUI_BUFFER_H
+#define UGUI_BUFFER_H
 
 #include <stdint.h>
 
@@ -14,7 +14,7 @@ void _ugui_buffer_set(ugui_buffer_t* buffer, ugui_point_t* point, ugui_pixel_t v
 
 void _ugui_buffer_clear(ugui_buffer_t* buffer);
 
-uint8_t* ugui_buffer_get_data(ugui_buffer_t* buffer);
+uint8_t* _ugui_buffer_get_data(ugui_buffer_t* buffer);
 
 void _ugui_buffer_destroy(ugui_buffer_t* buffer);
 

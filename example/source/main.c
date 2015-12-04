@@ -128,9 +128,9 @@ int main(int argc, char *argv[])
 
 		ugui_render(gui);
 
-		bool *img = ugui_get_image(gui);
+		uint8_t *img = ugui_get_image(gui);
 
-		bmp_create("test.bmp", GUI_WIDTH, GUI_HEIGHT, (bool*)img);
+		bmp_create_bw("test.bmp", GUI_WIDTH, GUI_HEIGHT, img);
 
 		SDL_Surface *bmp = SDL_LoadBMP("test.bmp");
 		SDL_Texture *tex = SDL_CreateTextureFromSurface(ren, bmp);
