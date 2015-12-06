@@ -9,7 +9,7 @@ ugui_layer_t* line_layer;
 
 /***			Internal Functions				***/
 
-static void line_layer_update(ugui_layer_t* layer, void* graphics_ctx)
+static void line_layer_update(ugui_layer_t* layer, void* graphics_ctx, void* layer_ctx)
 {
 	ugui_rect_t* bounds = ugui_layer_get_bounds(layer);
 

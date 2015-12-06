@@ -7,7 +7,7 @@ ugui_layer_t* circle_layer;
 
 /***			Internal Functions				***/
 
-static void circle_layer_update(ugui_layer_t* layer, void* graphics_ctx)
+static void circle_layer_update(ugui_layer_t* layer, void* graphics_ctx, void* layer_ctx)
 {
 	ugui_rect_t* bounds = ugui_layer_get_bounds(layer);
 

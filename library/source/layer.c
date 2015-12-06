@@ -13,6 +13,7 @@ struct ugui_layer_s {
 	ugui_rect_t bounds;
 	ugui_layer_update_t update;
 	bool dirty;
+	void* ctx;
 	ugui_layer_t *children[UGUI_LAYER_MAX_CHILDREN];
 };
 
@@ -57,6 +58,10 @@ int32_t ugui_layer_add_child(ugui_layer_t* layer, ugui_layer_t *child)
 	return 0;
 }
 
+void ugui_layer_set_ctx(ugui_layer_t* layer, void* ctx) {
+	layer->ctx = ctx;
+}
+
 void ugui_layer_set_update(ugui_layer_t* layer, ugui_layer_update_t update)
 {
 	layer->update = update;
@@ -77,7 +82,7 @@ int _ugui_layer_update(ugui_layer_t* layer, void* graphics_ctx)
 
 	_ugui_graphics_push_layer_ctx((ugui_graphics_t*) graphics_ctx, bounds);
 
-	if (layer->update != NULL) layer->update(layer, graphics_ctx);
+	if (layer->update != NULL) layer->update(layer, graphics_ctx, layer->ctx);
 
 	for (uint32_t i = 0; i < UGUI_LAYER_MAX_CHILDREN; i++) {
 		if (layer->children[i] != NULL) {
