@@ -1,4 +1,6 @@
 
+#include "circle_window.h"
+
 #include "ugui.h"
 
 ugui_window_t *circle_window;

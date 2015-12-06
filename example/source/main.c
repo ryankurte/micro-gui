@@ -7,6 +7,8 @@
 
 #include "ugui.h"
 #include "bmp.h"
+
+#include "menu_window.h"
 #include "line_window.h"
 #include "circle_window.h"
 #include "layer_window.h"
@@ -18,6 +20,7 @@ ugui_t* gui;
 ugui_window_t* line_test_window;
 ugui_window_t* circle_test_window;
 ugui_window_t* layer_test_window;
+ugui_window_t* menu_test_window;
 int running;
 
 int get_input_event()
@@ -80,6 +83,9 @@ int main(int argc, char *argv[])
 	gui = ugui_create(GUI_WIDTH, GUI_HEIGHT);
 	running = 1;
 
+	menu_test_window = menu_window_create(GUI_WIDTH, GUI_HEIGHT);
+	ugui_window_set_event_handler(menu_test_window, handle_event);
+
 	line_test_window = line_window_create(GUI_WIDTH, GUI_HEIGHT);
 	ugui_window_set_event_handler(line_test_window, handle_event);
 
@@ -89,7 +95,7 @@ int main(int argc, char *argv[])
 	layer_test_window = layer_window_create(GUI_WIDTH, GUI_HEIGHT);
 	ugui_window_set_event_handler(layer_test_window, handle_event);
 
-	ugui_window_stack_push(gui, line_test_window);
+	ugui_window_stack_push(gui, menu_test_window);
 
 	ugui_render(gui);
 

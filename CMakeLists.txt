@@ -6,6 +6,7 @@ include(${CMAKE_CURRENT_SOURCE_DIR}/library/ugui.cmake)
 
 set(APP_SOURCES
 	example/source/main.c 
+	example/source/menu_window.c
 	example/source/line_window.c 
 	example/source/circle_window.c 
 	example/source/layer_window.c

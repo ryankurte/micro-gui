@@ -1,4 +1,6 @@
 
+#include "layer_window.h"
+
 #include "ugui.h"
 
 ugui_window_t *layer_example_window;

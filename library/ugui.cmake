@@ -11,6 +11,10 @@ set(UGUI_SOURCES
 	${CMAKE_CURRENT_LIST_DIR}/source/font.c 
 	)
 
+set(UGUI_WIDGETS
+	${CMAKE_CURRENT_LIST_DIR}/source/widgets/menu_widget.c
+	)
+
 set(UGUI_FONTS
 	${CMAKE_CURRENT_LIST_DIR}/source/fonts/robotomono_regular_16.c 
 	${CMAKE_CURRENT_LIST_DIR}/source/fonts/robotomono_regular_18.c
@@ -18,4 +22,4 @@ set(UGUI_FONTS
 
 include_directories(${CMAKE_CURRENT_LIST_DIR}/include)
 
-add_library(libugui ${UGUI_SOURCES} ${UGUI_FONTS})
+add_library(libugui ${UGUI_SOURCES} ${UGUI_FONTS} ${UGUI_WIDGETS})
