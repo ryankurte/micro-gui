@@ -70,12 +70,11 @@ int main(int argc, char *argv[])
 
 	printf("\r\n------------------------------------\r\n");
 	printf("micro-gui (ugui) example application\r\n");
-	printf("Output will appear (while running) in ./test.bmp\r\n");
+	printf("Output will appear in an SDL window and real time in ./test.bmp\r\n");
 	//TODO: notes about SDL, make SDL rendering optional arg
-	printf("Use wasd to for directional navigation, q for back, and e for select\r\n");
-	printf("Note that you will need to press enter following each command\r\n");
+	printf("Use arrow keys for directional navigation\r\n");
 
-	SDL_Window *win = SDL_CreateWindow("micro-gui example", 100, 100, 640, 480, SDL_WINDOW_SHOWN);
+	SDL_Window *win = SDL_CreateWindow("micro-gui example", 100, 100, GUI_WIDTH, GUI_HEIGHT, SDL_WINDOW_SHOWN);
 	SDL_Renderer *ren = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 
 	gui = ugui_create(GUI_WIDTH, GUI_HEIGHT);
