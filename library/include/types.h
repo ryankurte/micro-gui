@@ -9,7 +9,13 @@
 extern "C" {
 #endif
 
+#if defined(UGUI_MODE_COLOR_16BIT)
+
+#elif defined(UGUI_MODE_COLOR_24BIT)
+
+#else
 typedef bool ugui_pixel_t;
+#endif
 
 typedef struct ugui_point_s {
 	uint16_t x;
@@ -34,10 +40,6 @@ typedef struct ugui_sprite_s {
 	uint16_t w_bytes;
 	uint8_t* data;
 } ugui_sprite_t;
-
-typedef struct ugui_font_s {
-	void* fake;
-} ugui_font_t;
 
 #ifdef __cplusplus
 }

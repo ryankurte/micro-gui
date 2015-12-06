@@ -32,11 +32,12 @@ typedef struct font_style_s
     uint8_t const *glyph_bitmaps;
 } font_style_t;
 
+int ugui_font_get_text_size(font_style_t *font, char *c, ugui_size_t* size);
+
+int _ugui_font_get_glyph(font_style_t *font, char c, ugui_sprite_t* glyph);
 
 extern font_style_t font_robotomono_regular_16;
 extern font_style_t font_robotomono_regular_18;
-
-int _ugui_font_get_glyph(font_style_t *font, char c, ugui_sprite_t* glyph) ;
 
 
 #endif

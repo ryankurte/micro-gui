@@ -2,7 +2,24 @@
 
 #include "font.h"
 
+#include <string.h>
+
 #include "types.h"
+
+int ugui_font_get_text_size(font_style_t *font, char *c, ugui_size_t* size) {
+	uint16_t len = strlen(c);
+	
+
+	size->h = font->glyph_height;
+	size->w = 0;
+
+	for(uint16_t i=0; i<len; i++) {
+		uint16_t index = c[i] - font->first_ascii_code;
+		size->w += font->glyph_width[index];
+	}
+
+	return 0;
+}
 
 int _ugui_font_get_glyph(font_style_t *font, char c, ugui_sprite_t* glyph) 
 {
