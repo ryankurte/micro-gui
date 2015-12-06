@@ -21,7 +21,9 @@
 #include "types.h"
 
 //Struct encapsulating a font style
-typedef struct font_style_s
+//TODO: this seemingly has to be public to allow fonts to be instantiated
+//maybe there is a better way here
+struct font_style_s
 {
     uint8_t glyph_count;
     uint8_t first_ascii_code;
@@ -30,7 +32,9 @@ typedef struct font_style_s
     uint8_t fixed_width;
     uint8_t const *glyph_width;
     uint8_t const *glyph_bitmaps;
-} font_style_t;
+};
+
+typedef struct font_style_s font_style_t;
 
 int ugui_font_get_text_size(font_style_t *font, char *c, ugui_size_t* size);
 
@@ -38,6 +42,5 @@ int _ugui_font_get_glyph(font_style_t *font, char c, ugui_sprite_t* glyph);
 
 extern font_style_t font_robotomono_regular_16;
 extern font_style_t font_robotomono_regular_18;
-
 
 #endif

@@ -9,7 +9,6 @@
 int ugui_font_get_text_size(font_style_t *font, char *c, ugui_size_t* size) {
 	uint16_t len = strlen(c);
 	
-
 	size->h = font->glyph_height;
 	size->w = 0;
 
