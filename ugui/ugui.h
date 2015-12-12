@@ -5,10 +5,10 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-#include "layer.h"
-#include "window.h"
-#include "types.h"
-#include "graphics.h"
+#include "ugui/layer.h"
+#include "ugui/window.h"
+#include "ugui/types.h"
+#include "ugui/graphics.h"
 
 #define UGUI_MAX_WINDOW_DEPTH			16
 

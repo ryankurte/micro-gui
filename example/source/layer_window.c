@@ -1,7 +1,7 @@
 
 #include "layer_window.h"
 
-#include "ugui.h"
+#include "ugui/ugui.h"
 
 ugui_window_t *layer_example_window;
 ugui_layer_t* quadrant_layers[4];

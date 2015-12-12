@@ -5,7 +5,7 @@
  * Based on: https://stackoverflow.com/questions/2654480/writing-bmp-image-in-pure-c-c-without-other-libraries
  */
 
-#include "bmp.h"
+#include "ugui/bmp.h"
 
 #define BMP_FILE_HEADER_SIZE		14
 #define BMP_INFO_HEADER_SIZE		40

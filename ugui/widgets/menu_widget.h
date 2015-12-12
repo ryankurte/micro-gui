@@ -4,7 +4,7 @@
 
 #include <stdint.h>
 
-#include "ugui.h"
+#include "ugui/ugui.h"
 
 
 typedef struct ugui_menu_index_s {

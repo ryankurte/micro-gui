@@ -1,8 +1,8 @@
 
 #include "line_window.h"
 
-#include "ugui.h"
-#include "font.h"
+#include "ugui/ugui.h"
+#include "ugui/font.h"
 
 ugui_window_t *line_window;
 ugui_layer_t* line_layer;

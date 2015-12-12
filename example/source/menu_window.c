@@ -1,10 +1,10 @@
 
 #include "menu_window.h"
 
-#include "ugui.h"
-#include "font.h"
+#include "ugui/ugui.h"
+#include "ugui/font.h"
 
-#include "widgets/menu_widget.h"
+#include "ugui/widgets/menu_widget.h"
 
 ugui_window_t *menu_window;
 

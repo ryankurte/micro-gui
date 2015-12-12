@@ -5,10 +5,10 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-#include "types.h"
-#include "font.h"
+#include "ugui/types.h"
+#include "ugui/font.h"
 
-#include "buffer.h"
+#include "ugui/buffer.h"
 
 #ifdef __cplusplus
 extern "C" {

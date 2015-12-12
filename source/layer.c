@@ -1,11 +1,11 @@
 
-#include "layer.h"
+#include "ugui/layer.h"
 
 #include <stdlib.h>
 #include <stdint.h>
 #include <stdbool.h>
 
-#include "graphics.h"
+#include "ugui/graphics.h"
 
 #define UGUI_LAYER_MAX_CHILDREN		8
 

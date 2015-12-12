@@ -1,5 +1,5 @@
 
-#include "widgets/menu_widget.h"
+#include "ugui/widgets/menu_widget.h"
 
 #include <stdlib.h>
 
@@ -19,9 +19,11 @@ static void menu_widget_layer_update(ugui_layer_t* layer, void* graphics_ctx, vo
 	char* title;
 	char* data;
 
-	for(uint8_t i=0; i<menu_widget->data_callbacks.get_num_rows(); i++) {
+#if 0
+	for (uint8_t i = 0; i < menu_widget->data_callbacks.get_num_rows(); i++) {
 		menu_widget->data_callbacks.
-	}	
+	}
+#endif
 }
 
 void ugui_menu_widget_basic_header_draw(ugui_graphics_t *graphics_ctx, ugui_layer_t *layer, char* title)
@@ -102,7 +104,7 @@ void ugui_menu_widget_set_callbacks(ugui_menu_widget_t* menu_widget, ugui_menu_w
 	menu_widget->data_callbacks.select = callbacks->select;
 }
 
-void ugui_menu_widget_set_draw(ugui_menu_widget_t* menu_widget, ugui_menu_widget_draw_callbacks_t* callbacks) 
+void ugui_menu_widget_set_draw(ugui_menu_widget_t* menu_widget, ugui_menu_widget_draw_callbacks_t* callbacks)
 {
 	menu_widget->draw_callbacks.draw_header = callbacks->draw_header;
 	menu_widget->draw_callbacks.draw_row = callbacks->draw_row;

@@ -1,12 +1,12 @@
 
-#include "ugui.h"
+#include "ugui/ugui.h"
 
 #include <stdlib.h>
 #include <stdint.h>
 #include <stdbool.h>
 
-#include "graphics.h"
-#include "buffer.h"
+#include "ugui/graphics.h"
+#include "ugui/buffer.h"
 
 struct ugui_s {
 	uint32_t w;

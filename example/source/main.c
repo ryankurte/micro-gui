@@ -5,8 +5,8 @@
 
 #include "SDL2/SDL.h"
 
-#include "ugui.h"
-#include "bmp.h"
+#include "ugui/ugui.h"
+#include "ugui/bmp.h"
 
 #include "menu_window.h"
 #include "line_window.h"

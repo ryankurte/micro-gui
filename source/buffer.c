@@ -1,6 +1,6 @@
 
 
-#include "buffer.h"
+#include "ugui/buffer.h"
 
 #include <stdlib.h>
 

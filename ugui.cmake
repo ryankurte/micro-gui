@@ -22,4 +22,4 @@ set(UGUI_FONTS
 
 include_directories(${CMAKE_CURRENT_LIST_DIR}/include)
 
-add_library(libugui ${UGUI_SOURCES} ${UGUI_FONTS} ${UGUI_WIDGETS})
+add_library(libmicro-gui ${UGUI_SOURCES} ${UGUI_FONTS} ${UGUI_WIDGETS})

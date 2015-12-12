@@ -5,7 +5,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-#include "types.h"
+#include "ugui/types.h"
 
 #ifdef __cplusplus
 extern "C" {

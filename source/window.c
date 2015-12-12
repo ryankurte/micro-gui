@@ -1,10 +1,10 @@
 
-#include "window.h"
+#include "ugui/window.h"
 
 #include <stdlib.h>
 
-#include "layer.h"
-#include "types.h"
+#include "ugui/layer.h"
+#include "ugui/types.h"
 
 /***			Public				***/
 

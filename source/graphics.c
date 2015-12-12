@@ -1,5 +1,5 @@
 
-#include "graphics.h"
+#include "ugui/graphics.h"
 
 #include <stdlib.h>
 #include <stdint.h>
@@ -8,9 +8,9 @@
 
 #include <assert.h>
 
-#include "layer.h"
-#include "font.h"
-#include "sprite.h"
+#include "ugui/layer.h"
+#include "ugui/font.h"
+#include "ugui/sprite.h"
 
 #define ABS(x)	(x < 0 ? -x : x)
 #define SIGN(x)	(x < 0 ? -1 : (x > 0 ? 1 : 0))

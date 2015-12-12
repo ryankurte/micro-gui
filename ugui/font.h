@@ -18,7 +18,7 @@
 
 #include <stdint.h>
 
-#include "types.h"
+#include "ugui/types.h"
 
 //Struct encapsulating a font style
 //TODO: this seemingly has to be public to allow fonts to be instantiated

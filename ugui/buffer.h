@@ -4,7 +4,7 @@
 
 #include <stdint.h>
 
-#include "types.h"
+#include "ugui/types.h"
 
 typedef struct ugui_buffer_s ugui_buffer_t;
 

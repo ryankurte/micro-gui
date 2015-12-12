@@ -1,7 +1,7 @@
 
 #include "circle_window.h"
 
-#include "ugui.h"
+#include "ugui/ugui.h"
 
 ugui_window_t *circle_window;
 ugui_layer_t* circle_layer;

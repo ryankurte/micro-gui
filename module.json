@@ -1,0 +1,17 @@
+{
+  "name": "micro-gui",
+  "version": "0.0.1",
+  "description": "Minimal GUI library for embedded systems",
+  "keywords": [
+    "GUI",
+    "rendering"
+  ],
+  "author": "Ryan Kurte",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:ryankurte/micro-gui.git"
+  },
+  "homepage": "https://github.com/ryankurte/micro-gui",
+  "license": "MIT",
+  "dependencies": {}
+}

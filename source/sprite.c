@@ -1,7 +1,7 @@
 
-#include "sprite.h"
+#include "ugui/sprite.h"
 
-#include "types.h"
+#include "ugui/types.h"
 
 //TODO: Function depends on b/w or color implementation
 uint8_t _ugui_sprite_get_pixel(ugui_sprite_t *sprite, uint16_t x, uint16_t y, ugui_pixel_t* pixel)
