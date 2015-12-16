@@ -1,22 +1,15 @@
 language: c
 
-addons:
-  apt:
-    packages:
-    - cmake
-    - make
-    - libsdl2-dev
-    - libsdl2-2.0-0
-    - libsdl2-image-dev
-    - libsdl2-image-2.0-0
-    sources:
-    - precise-backports
+sudo: true
 
 compiler:
     - clang
 
-install:
-    - ./test
+before-install:
+    - ./info.sh
+    - sudo -s 'cat "deb http://archive.ubuntu.com/ubuntu trusty-backports main restricted universe multiverse" >> /etc/apt/sources.list'
+    - sudo apt-get update
+    - sudo apt-get install make cmake libsdl2-dev
 
 script:
     - mkdir build
