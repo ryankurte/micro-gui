@@ -13,6 +13,9 @@ addons:
 compiler:
     - clang
 
+install:
+	- ./test.sh
+
 script:
     - mkdir build
     - cd build && cmake .. && make
