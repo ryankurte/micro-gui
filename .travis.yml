@@ -5,7 +5,7 @@ sudo: true
 compiler:
     - clang
 
-before-install:
+before_install:
     - ./info.sh
     - sudo -s 'cat "deb http://archive.ubuntu.com/ubuntu trusty-backports main restricted universe multiverse" >> /etc/apt/sources.list'
     - sudo apt-get update
