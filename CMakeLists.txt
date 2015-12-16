@@ -4,7 +4,10 @@ cmake_minimum_required (VERSION 2.8.7)
 
 project (ugui)
 
-find_package(sdl2 REQUIRED)
+set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR})
+find_package(SDL2 REQUIRED)
+
+include_directories(${SDL2_INCLUDE_DIR})
 
 include(${CMAKE_CURRENT_SOURCE_DIR}/ugui.cmake)
 
@@ -21,4 +24,4 @@ set(APP_SOURCES
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/example/include)
 
 add_executable (${CMAKE_PROJECT_NAME} ${APP_SOURCES})
-target_link_libraries(${CMAKE_PROJECT_NAME} libugui SDL2)
+target_link_libraries(${CMAKE_PROJECT_NAME} libugui ${SDL2_LIBRARY})

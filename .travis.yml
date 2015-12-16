@@ -10,9 +10,6 @@ addons:
 compiler:
     - clang
 
-install:
-	export C_INCLUDE_PATH=$C_INCLUDE_PATH:`pkg-config --cflags sdl2`
-
 script:
     - mkdir build
     - cd build && cmake .. && make
