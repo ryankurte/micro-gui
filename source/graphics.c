@@ -78,6 +78,26 @@ static void plot(ugui_graphics_t* graphics, uint32_t x, uint32_t y)
 
 }
 
+static void inverse(ugui_graphics_t* graphics, uint32_t x, uint32_t y)
+{
+	//Calculate offsets
+	uint32_t new_x = x + graphics->offset_x;
+	uint32_t new_y = y + graphics->offset_y;
+
+	//Draw point if within graphics buffer and layer bounds
+	if ((new_x < graphics->w) && (x < graphics->limit_w)
+	        && (new_y < graphics->h) && (y < graphics->limit_h)) {
+		ugui_pixel_t pixel;
+		_ugui_buffer_get(graphics->buffer, &(ugui_point_t) {
+			.x = new_x, .y = new_y
+		}, &pixel);
+		_ugui_buffer_set(graphics->buffer, &(ugui_point_t) {
+			.x = new_x, .y = new_y
+		}, ~pixel);
+	}
+
+}
+
 void ugui_graphics_clear(ugui_graphics_t* graphics)
 {
 	_ugui_buffer_clear(graphics->buffer);
@@ -100,11 +120,18 @@ void ugui_graphics_draw_rect(ugui_graphics_t *graphics, ugui_point_t a, ugui_siz
 
 void ugui_graphics_fill_rect(ugui_graphics_t *graphics, ugui_point_t a, ugui_size_t size)
 {
-	//Horizontal lines
 	for (int i = 0; i < size.h; i++) {
 		for (int j = 0; j < size.w; j++) {
 			plot(graphics, a.x + j, a.y + i);
-			plot(graphics, a.x + j, a.y + i);
+		}
+	}
+}
+
+void ugui_graphics_inverse_rect(ugui_graphics_t *graphics, ugui_point_t a, ugui_size_t size)
+{
+	for (int i = 0; i < size.h; i++) {
+		for (int j = 0; j < size.w; j++) {
+			inverse(graphics, a.x + j, a.y + i);
 		}
 	}
 }
@@ -260,7 +287,7 @@ void ugui_graphics_draw_sprite(ugui_graphics_t* graphics, ugui_sprite_t sprite, 
 		for (int x = 0; x < sprite.w; x++) {
 			ugui_pixel_t pixel;
 			_ugui_sprite_get_pixel(&sprite, x, y, &pixel);
-			if(pixel) {
+			if (pixel) {
 				plot(graphics, point.x + x, point.y + y);
 			}
 		}

@@ -28,6 +28,8 @@ void ugui_graphics_draw_rect(ugui_graphics_t *graphics, ugui_point_t a, ugui_siz
 
 void ugui_graphics_fill_rect(ugui_graphics_t *graphics, ugui_point_t a, ugui_size_t size);
 
+void ugui_graphics_inverse_rect(ugui_graphics_t *graphics, ugui_point_t a, ugui_size_t size);
+
 void ugui_graphics_draw_ellipse(ugui_graphics_t* graphics, ugui_rect_t rect);
 
 void ugui_graphics_draw_sprite(ugui_graphics_t* graphics, ugui_sprite_t sprite, ugui_point_t point);

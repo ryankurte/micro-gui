@@ -20,6 +20,6 @@ set(UGUI_FONTS
 	${CMAKE_CURRENT_LIST_DIR}/source/fonts/robotomono_regular_18.c
 	)
 
-include_directories(${CMAKE_CURRENT_LIST_DIR}/include)
+include_directories(${CMAKE_CURRENT_LIST_DIR})
 
-add_library(libmicro-gui ${UGUI_SOURCES} ${UGUI_FONTS} ${UGUI_WIDGETS})
+add_library(libugui ${UGUI_SOURCES} ${UGUI_FONTS} ${UGUI_WIDGETS})
