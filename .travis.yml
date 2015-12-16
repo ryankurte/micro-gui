@@ -1,13 +1,13 @@
 language: c
 
-addons:
-  apt:
-    packages:
-    - cmake
-    - make
-    - libsdl2-dev
-    sources:
-    - zoogie/sdl2-snapshots
+sudo: true
+
+before_install:
+  - sudo add-apt-repository -y ppa:zoogie/sdl2-snapshots
+  - sudo apt-get update -qq
+
+install:
+  - sudo apt-get install libXxf86vm-dev make cmake libsdl2-dev
 
 compiler:
     - clang
