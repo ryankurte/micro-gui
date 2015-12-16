@@ -8,6 +8,9 @@ It provides a simple window stack, layers for composition of windows, graphics f
 
 If you have any issues or feature requests, feel free to open an issue or a pull request. And, if you find yourself using this in a project, I would love to know about it!
 
+## Build Status
+[![Build Status](https://travis-ci.org/ryankurte/micro-gui.svg)](https://travis-ci.org/ryankurte/micro-gui)
+
 ## Goals
  - Simple to embed
    - No (or minor) external dependencies

@@ -8,8 +8,7 @@ addons:
     - libsdl2-dev
 
 compiler:
-- gcc
-- clang
+	- clang
 
 script:
     - mkdir build
