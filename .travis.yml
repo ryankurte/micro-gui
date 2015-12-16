@@ -7,7 +7,7 @@ compiler:
 
 before_install:
     - ./info.sh
-    - sudo -s 'cat "deb http://archive.ubuntu.com/ubuntu trusty-backports main restricted universe multiverse" >> /etc/apt/sources.list'
+    - sudo -s 'cat "deb http://archive.ubuntu.com/ubuntu trusty-backports main restricted universe multiverse" >> /etc/apt/sources.list.d/backports'
     - sudo apt-get update
     - sudo apt-get install make cmake libsdl2-dev
 

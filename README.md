@@ -43,12 +43,11 @@ If you have any issues or feature requests, feel free to open an issue or a pull
 ## Getting Started
 
  - Checkout project with `git clone git@github.com:ryankurte/micro-gui.git`
- - Change to example directory with `cd micro-gui/example`
  - Create build directory with `mkdir build`
  - Change to build directory with `cd build`
  - Initialize cmake with `cmake ..`
  - Build with `make`
- - Run with `./ugui-example`
+ - Run with `./ugui`
 
 ## Examples
 
@@ -56,9 +55,9 @@ For an example application see the `example/` folder. This application will upda
 
 ## Credits
 
- - (Pebble)[https://getpebble.com] for inspiration 
- - Line and Ellipse functions adapted from (here)[https://www.opengl.org/discussion_boards/showthread.php/168761-Drawing-Line-Bresenhem-midpoint-algorithm]
- - Fonts from (here) [https://github.com/dhepper/font8x8]
+ - [Pebble](https://getpebble.com) for inspiration 
+ - Line and Ellipse functions adapted from [here](https://www.opengl.org/discussion_boards/showthread.php/168761-Drawing-Line-Bresenhem-midpoint-algorithm)
+ - Fonts from [here](https://github.com/dhepper/font8x8)
 
 ## License
 
