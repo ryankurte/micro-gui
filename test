@@ -1,0 +1,5 @@
+#!/bin/bash
+
+echo "Testing"
+echo `pkg-config --cflags sdl2`
+echo `apt-cache search sdl2`

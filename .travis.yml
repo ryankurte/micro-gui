@@ -14,7 +14,7 @@ compiler:
     - clang
 
 install:
-	- test.sh
+    - ./test
 
 script:
     - mkdir build
