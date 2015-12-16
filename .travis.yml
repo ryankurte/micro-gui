@@ -1,0 +1,15 @@
+language: c
+
+compiler:
+- gcc
+- clang
+
+install: make cmake get-deps
+
+script:
+    - mkdir build
+    - cd build; cmake ..; make; cd ..
+
+os:
+- linux
+- osx
