@@ -6,6 +6,8 @@ project (ugui)
 
 include(${CMAKE_CURRENT_SOURCE_DIR}/ugui.cmake)
 
+set(CMAKE_C_FLAGS "-std=gnu11")
+
 set(APP_SOURCES
 	example/source/main.c 
 	example/source/menu_window.c
