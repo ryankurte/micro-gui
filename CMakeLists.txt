@@ -4,6 +4,8 @@ cmake_minimum_required (VERSION 2.8.7)
 
 project (ugui)
 
+find_package(sdl2 REQUIRED)
+
 include(${CMAKE_CURRENT_SOURCE_DIR}/ugui.cmake)
 
 set(CMAKE_C_FLAGS "-std=gnu11")
