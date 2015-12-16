@@ -91,11 +91,16 @@ static void inverse(ugui_graphics_t* graphics, uint32_t x, uint32_t y)
 		_ugui_buffer_get(graphics->buffer, &(ugui_point_t) {
 			.x = new_x, .y = new_y
 		}, &pixel);
-		_ugui_buffer_set(graphics->buffer, &(ugui_point_t) {
-			.x = new_x, .y = new_y
-		}, ~pixel);
+		if (pixel == 1) {
+			_ugui_buffer_set(graphics->buffer, &(ugui_point_t) {
+				.x = new_x, .y = new_y
+			}, 0);
+		} else if(pixel == 0) {
+			_ugui_buffer_set(graphics->buffer, &(ugui_point_t) {
+				.x = new_x, .y = new_y
+			}, 1);
+		}
 	}
-
 }
 
 void ugui_graphics_clear(ugui_graphics_t* graphics)

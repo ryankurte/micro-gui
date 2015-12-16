@@ -76,6 +76,15 @@ static void main_layer_update(ugui_layer_t* layer, void* graphics_ctx, void* lay
 		.x = w - 1, .y = h / 2
 	});
 
+#if 0
+	//Inverse a bit, this is decidedly not working
+	ugui_graphics_inverse_rect(graphics_ctx, (ugui_point_t) {
+		.x = 0, .y = 0
+	}, (ugui_size_t) {
+		.w = w - 1, .h = h - 1
+	});
+#endif
+
 	ugui_layer_set_dirty(layer);
 }
 

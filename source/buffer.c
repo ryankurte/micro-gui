@@ -60,7 +60,7 @@ void _ugui_buffer_get(ugui_buffer_t* buffer, ugui_point_t* point, ugui_pixel_t* 
 	int x = point->x / 8;
 	int shift = point->x % 8;
 
-	*value = ((buffer->data[buffer->row_width_bytes * y + x] & shift) != 0);
+	*value = ((buffer->data[buffer->row_width_bytes * y + x] & (1 << shift)) != 0);
 }
 
 void _ugui_buffer_clear(ugui_buffer_t* buffer) {
