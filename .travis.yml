@@ -1,5 +1,12 @@
 language: c
 
+addons:
+  apt:
+    packages:
+    - cmake
+    - make
+    - libsdl2-dev
+
 compiler:
 - gcc
 - clang
