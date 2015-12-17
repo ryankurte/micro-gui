@@ -1,0 +1,3 @@
+[submodule "resources/open-iconic"]
+	path = resources/open-iconic
+	url = https://github.com/iconic/open-iconic.git

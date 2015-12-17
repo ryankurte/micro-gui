@@ -7,60 +7,81 @@ import argparse
 import re
 
 from PIL import Image
+import pystache
 
-header = '#include <stdint.h>\r\n\r\n'
 
 def process_image(filename):
-	image = Image.open(args.folder + '/' + filename)
-	
-	data = list(image.getdata());
-
-	return filename.split('.')[0], data
+	image = Image.open(args.folder[0] + '/' + filename)
+	data = list(image.getdata())
+	return filename.split('.')[0].replace('-', '_'), data
 
 def generate_line(name, data):
-	data_array = [];
-	for a in data:
-		data_array.append(str(a[3]))
-	line = 'uint8_t ' + name + '[] = {' + ', '.join(data_array) + '};'
+	line = 'uint8_t ' + name + '[] = {' + data + '};'
 	return line
 
-# Setup arguments
-parser = argparse.ArgumentParser(description='Process some integers.')
-parser.add_argument('scale', metavar='N', type=int, default=1, 
-                           help='icon scale, either 1, 2, 3, 4, 6, 8')
+def generate_data(data):
+	data_array = []
+	for a in data:
+		data_array.append(hex(a[3]))
+	return ', '.join(data_array)
 
-parser.add_argument('--folder', nargs=1, default='./png',
+def generate_file(template, name, data):
+	print("Writing to output file: " + name)
+
+	template_file = open(template, 'r')
+	template = template_file.read()
+	template_file.close()
+
+	output_data = pystache.render(template, data)
+
+	output_file = open(name, 'w')
+
+	output_file.write(output_data)
+	output_file.close()
+
+
+# Setup arguments
+parser = argparse.ArgumentParser(description='Process open-iconic png files to c sources')
+
+parser.add_argument('--scale', nargs=1, type=int, default=1, 
+                   help='icon scale, either 1, 2, 3, 4, 6, 8')
+
+parser.add_argument('--folder', nargs=1, default=['./png'],
                    help='folder to look for icons')
 
-parser.add_argument('--output', nargs=1, default='outputs.c',
+parser.add_argument('--template', nargs=1, default=['icon-template.h'],
+                   help='mustache template to fill')
+
+parser.add_argument('--output', nargs=1, default=['icons.h'],
                    help='output file')
 
 args = parser.parse_args()
 
+
 # Create filter for scale setting
-if args.scale == 1:
+if args.scale[0] == 1:
 	filter = re.compile('^([a-z\-]+).png')
 else:
-	filter = re.compile('^([a-z]+)-' + str(args.scale) + 'x.png')
+	filter = re.compile('^([a-z\-]+)-' + str(args.scale) + 'x.png')
 
 # Parse folder
-files = [f for f in listdir(args.folder) if isfile(join(args.folder, f))]
+files = [f for f in listdir(args.folder[0]) if isfile(join(args.folder[0], f))]
 
 # Filter files based on scale
-filtered_files = [f for f in files if filter.match(f)];
+filtered_files = [f for f in files if filter.match(f)]
 
-file_data = []
+file_data = {}
 
-print("Writing to output file: " + args.output)
-
-output_file = open(args.output,'w')
-
-output_file.write(header);
+file_data['template'] = args.template[0]
+file_data['scale'] = args.scale[0]
+file_data['icons'] = []
 
 for f in filtered_files:
-	name, data = process_image(f);
-	line = generate_line(name, data)
+	name, data = process_image(f)
+	icon = {}
+	icon['name'] = name
+	icon['data'] = generate_data(data)
+	icon['size'] = len(data)
+	file_data['icons'].append(icon)
 
-	output_file.write(line + '\r\n')
-
-output_file.close()
+generate_file(args.template[0], args.output[0], file_data)
