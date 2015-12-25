@@ -75,7 +75,7 @@ def bytes_to_string(image_bytes):
 
 
 def generate_file(template, name, data):
-	print("Writing to output file: " + name)
+	#print("Writing to output file: " + name)
 
 	template_file = open(template, 'r')
 	template = template_file.read()
@@ -129,7 +129,7 @@ images = {};
 for c in chars:
 	images[c] = process_char(font, c);
 
-print("Created: " + str(len(images)) + " sprites");
+#print("Created: " + str(len(images)) + " sprites");
 
 # Determine minimum height and width
 min_width = 0;
@@ -141,8 +141,8 @@ for i in images:
 	if min_height < images[i].size[1]:
 		min_height = images[i].size[1];
 
-print("Minimum width: " + str(min_width) + " pixels");
-print("Minimum height: " + str(min_height) + " pixels");
+#print("Minimum width: " + str(min_width) + " pixels");
+#print("Minimum height: " + str(min_height) + " pixels");
 
 # Calculate minimum common image width
 min_width_bytes = int(min_width / 8);

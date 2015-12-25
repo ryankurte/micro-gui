@@ -42,5 +42,7 @@ int _ugui_font_get_glyph(font_style_t *font, char c, ugui_sprite_t* glyph);
 
 extern font_style_t font_robotomono_regular_16;
 extern font_style_t font_robotomono_regular_18;
+extern font_style_t font_robotomono_regular_24;
+extern font_style_t font_robotomono_regular_32;
 
 #endif
