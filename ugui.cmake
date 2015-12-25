@@ -15,9 +15,12 @@ set(UGUI_WIDGETS
 	${CMAKE_CURRENT_LIST_DIR}/source/widgets/menu_widget.c
 	)
 
+#TODO: glob font sources
 set(UGUI_FONTS
 	${CMAKE_CURRENT_LIST_DIR}/source/fonts/robotomono_regular_16.c 
 	${CMAKE_CURRENT_LIST_DIR}/source/fonts/robotomono_regular_18.c
+	${CMAKE_CURRENT_LIST_DIR}/source/fonts/robotomono_regular_24.c 
+	${CMAKE_CURRENT_LIST_DIR}/source/fonts/robotomono_regular_32.c
 	)
 
 set(UGUI_ICONS

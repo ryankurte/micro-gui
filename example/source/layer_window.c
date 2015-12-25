@@ -53,13 +53,13 @@ static void main_layer_update(ugui_layer_t* layer, void* graphics_ctx, void* lay
 	int h = bounds->h;
 
 	ugui_size_t text_size;
-	ugui_font_get_text_size(&font_robotomono_regular_18,
+	ugui_font_get_text_size(&font_robotomono_regular_32,
 	                        "Layer Demo",
 	                        &text_size);
 
 	ugui_graphics_draw_text(graphics_ctx,
 	                        "Layer Demo",
-	                        &font_robotomono_regular_18,
+	                        &font_robotomono_regular_32,
 	(ugui_point_t) {
 		.x = w / 2 - text_size.w / 2, .y = h / 4
 	});

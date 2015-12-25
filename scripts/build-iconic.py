@@ -22,7 +22,7 @@ def generate_data(data):
 	return ', '.join(data_array)
 
 def generate_file(template, name, data):
-	print("Writing to output file: " + name)
+	# print("Writing to output file: " + name)
 
 	template_file = open(template, 'r')
 	template = template_file.read()
@@ -50,6 +50,9 @@ parser.add_argument('--template', nargs=1, default=['icon-template.h'],
 
 parser.add_argument('--output', nargs=1, default=['icons.h'],
                    help='output file')
+
+parser.add_argument('--debug',
+                   help='debug mode')
 
 args = parser.parse_args()
 
