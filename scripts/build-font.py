@@ -10,6 +10,9 @@ import string
 from PIL import Image, ImageFont, ImageDraw
 import pystache
 
+def print_hex(val):
+	return "{0:#0{1}x}".format(val,4)
+
 def process_char(font, char):
 	# Calculate char info
 	char_size = font.getsize(char);
@@ -38,7 +41,7 @@ def generate_bin_image(image):
 
 	return bin_image;
 
-def bin_to_byte_data(image_bin):
+def bin_to_byte_data(min_width_bytes, min_height, image_bin):
 	data = [];
 	for i in range(0, len(image_bin)) :
 		row = image_bin[i];
@@ -47,14 +50,21 @@ def bin_to_byte_data(image_bin):
 		for j in range(0, len(row)):
 			temp += str(row[j]);
 			if(len(temp) % 8 == 0):
-				row_data.append(hex(int(temp, 2)));
+				row_data.append(print_hex(int(temp, 2)));
 				temp = '';
 		if len(temp) > 0 :
 			while len(temp) < 8:
 				temp += '0';
-			row_data.append(hex(int(temp, 2)));
+			row_data.append(print_hex(int(temp, 2)));
+
+		while len(row_data) < min_width_bytes:
+			row_data.append(print_hex(0));
 
 		data.append(row_data);
+
+		while(len(data) < min_height):
+			row_data = [print_hex(0) for i in range(0, min_width_bytes)];
+			data.append(row_data)
 	return data;
 
 def bytes_to_string(image_bytes):
@@ -81,7 +91,7 @@ def generate_file(template, name, data):
 # Setup arguments
 parser = argparse.ArgumentParser(description='Process open-iconic png files to c sources')
 
-parser.add_argument('--size', nargs=1, type=int, default=16, 
+parser.add_argument('--size', nargs=1, type=int, default=[16], 
                    help='font size')
 
 parser.add_argument('--font', nargs=1, default=["../resources/RobotoMono-Regular.ttf"],
@@ -93,10 +103,10 @@ parser.add_argument('--template', nargs=1, default=['font-template.c'],
 parser.add_argument('--output', nargs=1, default=['font.c'],
                    help='output file name')
 
-parser.add_argument('--start', nargs=1, type=int, default=32, 
+parser.add_argument('--start', nargs=1, type=int, default=[32], 
                    help='start character')
 
-parser.add_argument('--end', nargs=1, type=int, default=127, 
+parser.add_argument('--end', nargs=1, type=int, default=[127], 
                    help='end character')
 
 # Parse arguments
@@ -106,10 +116,10 @@ font_file = args.font[0];
 font_path = font_file.split('/');
 font_name = font_path[len(font_path) - 1].split('.')[0].replace('-', '_').lower();
 
-font_size = args.size;
+font_size = args.size[0];
 
 
-chars = [chr(c) for c in range(args.start, args.end)];
+chars = [chr(c) for c in range(args.start[0], args.end[0])];
 print(chars);
 
 font = ImageFont.truetype(font=font_file, size=font_size);
@@ -120,8 +130,7 @@ images = {};
 for c in chars:
 	images[c] = process_char(font, c);
 
-print(len(images));
-images['A'].save('test.bmp');
+print("Created: " + str(len(images)) + " sprites");
 
 # Determine minimum height and width
 min_width = 0;
@@ -137,7 +146,7 @@ print("Minimum width: " + str(min_width) + " pixels");
 print("Minimum height: " + str(min_height) + " pixels");
 
 # Calculate minimum common image width
-min_width_bytes = min_width / 8;
+min_width_bytes = int(min_width / 8);
 if min_width % 8 != 0:
 	min_width_bytes += 1;
 
@@ -148,9 +157,11 @@ for i in chars:
 
 # Convert into bytes
 # TODO: pad heights and widths to common size
+# This is broken atm
+min_height = 0;
 image_bytes = {};
 for i in chars:
-	image_bytes[i] = bin_to_byte_data(image_data[i]);
+	image_bytes[i] = bin_to_byte_data(min_width_bytes, min_height, image_data[i]);
 
 # Generate character data strings
 image_strings = {};

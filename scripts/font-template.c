@@ -16,5 +16,7 @@
 #include "fonts/font_style.h"
 
 {{#chars}}
-static const uint8_t font_{{name}}_size_{{size}}_char_{{code}}[] = { {{string}} };
+static const uint8_t font_{{name}}_size_{{size}}_char_{{code}}[] = {  //{{char}}
+{{string}}
+};
 {{/chars}}
