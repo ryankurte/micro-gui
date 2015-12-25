@@ -3,8 +3,10 @@
  * For use with the ugui python ttf font -> c font generator
  * See build-font.py
  * 
- * Name: {{name}}
- * Size: {{size}}
+ * Font name: {{name}}
+ * Font size: {{size}}
+ * Start char: {{start}}
+ * End char: {{end}}
  */
 
 #include <stdint.h>

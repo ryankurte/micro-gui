@@ -93,6 +93,12 @@ parser.add_argument('--template', nargs=1, default=['font-template.c'],
 parser.add_argument('--output', nargs=1, default=['font.c'],
                    help='output file name')
 
+parser.add_argument('--start', nargs=1, type=int, default=32, 
+                   help='start character')
+
+parser.add_argument('--end', nargs=1, type=int, default=127, 
+                   help='end character')
+
 # Parse arguments
 args = parser.parse_args()
 
@@ -103,7 +109,8 @@ font_name = font_path[len(font_path) - 1].split('.')[0].replace('-', '_').lower(
 font_size = args.size;
 
 
-chars = string.printable;
+chars = [chr(c) for c in range(args.start, args.end)];
+print(chars);
 
 font = ImageFont.truetype(font=font_file, size=font_size);
 
@@ -136,18 +143,18 @@ if min_width % 8 != 0:
 
 # Generate image data
 image_data = {};
-for i in images:
+for i in chars:
 	image_data[i] = generate_bin_image(images[i]);
 
 # Convert into bytes
 # TODO: pad heights and widths to common size
 image_bytes = {};
-for i in image_data:
+for i in chars:
 	image_bytes[i] = bin_to_byte_data(image_data[i]);
 
 # Generate character data strings
 image_strings = {};
-for i in image_bytes:
+for i in chars:
 	image_strings[i] = bytes_to_string(image_bytes[i]);
 
 # Combine into structure for template use
@@ -158,7 +165,7 @@ template_data['name'] = font_name;
 template_data['start'] = ord(chars[0]);
 template_data['end'] = ord(chars[len(chars) - 1]);
 
-for i in image_data:
+for i in chars:
 	char_data = {};
 	
 	char_data['char'] = i;
@@ -171,6 +178,6 @@ for i in image_data:
 
 	template_data['chars'].append(char_data);
 
-print(template_data);
+#print(template_data);
 
 generate_file(args.template[0], args.output[0], template_data);
