@@ -15,10 +15,6 @@ def process_image(filename):
 	data = list(image.getdata())
 	return filename.split('.')[0].replace('-', '_'), data
 
-def generate_line(name, data):
-	line = 'uint8_t ' + name + '[] = {' + data + '};'
-	return line
-
 def generate_data(data):
 	data_array = []
 	for a in data:
