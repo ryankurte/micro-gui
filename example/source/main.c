@@ -95,7 +95,7 @@ int main(int argc, char *argv[])
 	layer_test_window = layer_window_create(GUI_WIDTH, GUI_HEIGHT);
 	ugui_window_set_event_handler(layer_test_window, handle_event);
 
-	ugui_window_stack_push(gui, layer_test_window);
+	ugui_window_stack_push(gui, menu_test_window);
 
 	ugui_render(gui);
 
@@ -128,7 +128,6 @@ int main(int argc, char *argv[])
 					running = 0;
 					break;
 				}
-				printf("event!\r\n");
 			}
 		}
 
