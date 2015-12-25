@@ -30,3 +30,6 @@ icons_8x:
 	python3 ./scripts/build-iconic.py --scale=8 --folder=./resources/open-iconic/png --template=./scripts/icon-template.h --output=./ugui/icons/icons_8x.h
 	python3 ./scripts/build-iconic.py --scale=8 --folder=./resources/open-iconic/png --template=./scripts/icon-template.c --output=./source/icons/icons_8x.c
 
+roboto_16:
+	python3 ./scripts/build-font.py --size=16 --font=./resources/fonts/RobotoMono-Regular.ttf --template=./scripts/font-template.c --output=./source/fonts/robotomono_regular_16.c
+	python3 ./scripts/build-font.py --size=16 --font=./resources/fonts/RobotoMono-Regular.ttf --template=./scripts/font-template.h --output=./ugui/fonts/robotomono_regular_16.h

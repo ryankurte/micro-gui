@@ -62,15 +62,15 @@ def bin_to_byte_data(min_width_bytes, min_height, image_bin):
 
 		data.append(row_data);
 
-		while(len(data) < min_height):
-			row_data = [print_hex(0) for i in range(0, min_width_bytes)];
-			data.append(row_data)
+	while(len(data) < min_height):
+		row_data = [print_hex(0) for i in range(0, min_width_bytes)];
+		data.append(row_data)
 	return data;
 
 def bytes_to_string(image_bytes):
 	data = '';
 	for i in range(0, len(image_bytes)):
-		data += ', '.join(image_bytes[i]) + '\r\n';
+		data += ', '.join(image_bytes[i]) + ',\r\n';
 	return data;
 
 
@@ -118,9 +118,8 @@ font_name = font_path[len(font_path) - 1].split('.')[0].replace('-', '_').lower(
 
 font_size = args.size[0];
 
-
+# Generate char list
 chars = [chr(c) for c in range(args.start[0], args.end[0])];
-print(chars);
 
 font = ImageFont.truetype(font=font_file, size=font_size);
 
@@ -156,9 +155,6 @@ for i in chars:
 	image_data[i] = generate_bin_image(images[i]);
 
 # Convert into bytes
-# TODO: pad heights and widths to common size
-# This is broken atm
-min_height = 0;
 image_bytes = {};
 for i in chars:
 	image_bytes[i] = bin_to_byte_data(min_width_bytes, min_height, image_data[i]);
@@ -173,8 +169,12 @@ template_data = {};
 template_data['chars'] = [];
 template_data['size'] = font_size;
 template_data['name'] = font_name;
+template_data['NAME'] = font_name.upper();
 template_data['start'] = ord(chars[0]);
 template_data['end'] = ord(chars[len(chars) - 1]);
+template_data['count'] = args.end[0] - args.start[0];
+template_data['char_height'] = min_height;
+template_data['char_width'] = min_width_bytes;
 
 for i in chars:
 	char_data = {};
