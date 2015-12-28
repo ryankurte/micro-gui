@@ -33,12 +33,15 @@ If you have any issues or feature requests, feel free to open an issue or a pull
  - Layers mostly working
  - Graphics module 
    - layer offsets implemented, need to implement bounds
-   - text rendering not (yet) implemented
+   - text rendering implemented
+ - Asset pipeline
+   - OpenIconic - generation complete, needs functions to convert to sprites
+   - Fonts - complete, converts .ttf fonts to directly compatible c source/header files
  - Widgets
-   - working on menu, needs text really
-   - todo: progress bar, alert/message box
+   - working on menu
+   - todo: progress bar, alert/message box, buttons
  - Testing, needs to be implemented (w/ CI)
- - Example, would be cool to have a real time window, needs to be simple, though.
+ - Example, work in progress using SDL2
 
 ## Getting Started
 
