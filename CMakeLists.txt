@@ -4,10 +4,11 @@ cmake_minimum_required (VERSION 2.8.7)
 
 project (ugui)
 
+
+# Find SDL2 if required
+if(NOT DEFINED NO_SDL2)
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR})
 find_package(SDL2 REQUIRED)
-
-if(NOT DEFINED NO_SDL2)
 add_definitions("-DUSE_SDL2=1")
 endif()
 
