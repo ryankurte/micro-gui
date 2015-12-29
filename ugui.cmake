@@ -31,6 +31,12 @@ set(UGUI_ICONS
 	${CMAKE_CURRENT_LIST_DIR}/source/icons/icons_8x.c 
 	)
 
+if(NOT DEFINED NO_SDL2)
+	set(UGUI_SDL
+		${CMAKE_CURRENT_LIST_DIR}/source/ugui_sdl.c
+	)
+endif()
+
 include_directories(${CMAKE_CURRENT_LIST_DIR})
 
-add_library(libugui ${UGUI_SOURCES} ${UGUI_FONTS} ${UGUI_ICONS} ${UGUI_WIDGETS})
+add_library(libugui ${UGUI_SOURCES} ${UGUI_SDL} ${UGUI_FONTS} ${UGUI_ICONS} ${UGUI_WIDGETS})

@@ -5,19 +5,13 @@ addons:
     packages:
     - cmake
     - make
-    - libsdl2-dev
-    - libsdl2-2.0-0
-    - libsdl2-image-dev
-    - libsdl2-image-2.0-0
-    sources:
-    - precise-backports
 
 compiler:
     - clang
 
 script:
     - mkdir build
-    - cd build && cmake .. && make
+    - cd build && cmake -DNO_SDL2=1 .. && make
 
 notifications:
     email: false

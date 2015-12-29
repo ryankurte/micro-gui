@@ -23,7 +23,8 @@ enum ugui_event_e {
 	UGUI_EVT_LEFT,
 	UGUI_EVT_RIGHT,
 	UGUI_EVT_SELECT,
-	UGUI_EVT_BACK
+	UGUI_EVT_BACK,
+	UGUI_EVT_EXIT
 };
 
 typedef struct ugui_s ugui_t;

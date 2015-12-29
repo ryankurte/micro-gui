@@ -3,7 +3,7 @@
 #include <stdbool.h>
 #include <unistd.h>
 
-#include "SDL2/SDL.h"
+#include "ugui/ugui_sdl.h"
 
 #include "ugui/ugui.h"
 #include "ugui/bmp.h"
@@ -69,16 +69,26 @@ void handle_event(ugui_window_t* window, int event)
 
 int main(int argc, char *argv[])
 {
-	SDL_Init( SDL_INIT_EVERYTHING );
 
+#ifdef USE_SDL2
 	printf("\r\n------------------------------------\r\n");
 	printf("micro-gui (ugui) example application\r\n");
 	printf("Output will appear in an SDL window and real time in ./test.bmp\r\n");
-	//TODO: notes about SDL, make SDL rendering optional arg
 	printf("Use arrow keys for directional navigation\r\n");
 
-	SDL_Window *win = SDL_CreateWindow("micro-gui example", 100, 100, GUI_WIDTH, GUI_HEIGHT, SDL_WINDOW_SHOWN);
-	SDL_Renderer *ren = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+#else
+printf("\r\n------------------------------------\r\n");
+	printf("micro-gui (ugui) example application\r\n");
+	printf("Output will appear (while running) in ./test.bmp\r\n");
+	printf("You may need to refresh this image manually.\r\n");
+	printf("Alternately, compile without -DNO_SDL2 to enable SDL2 based rendering\r\n");
+	printf("Use wasd to for directional navigation, q for back, and e for select\r\n");
+	printf("Note that you will need to press enter following each command\r\n");
+#endif
+
+#ifdef USE_SDL2
+	ugui_sdl_t *sdl_ctx = ugui_sdl_init("micro-gui example", GUI_WIDTH, GUI_HEIGHT);
+#endif
 
 	gui = ugui_create(GUI_WIDTH, GUI_HEIGHT);
 	running = 1;
@@ -100,36 +110,18 @@ int main(int argc, char *argv[])
 	ugui_render(gui);
 
 	while (running > 0) {
-		//int event = get_input_event();
-		//ugui_put_event(gui, event);
 
-		//Handle SDL events
-		SDL_Event event;
-		while (SDL_PollEvent(&event)) {
-			if (event.type == SDL_QUIT) {
-				running = 0;
-			}
-			if (event.type == SDL_KEYDOWN) {
-				switch (event.key.keysym.sym) {
-				case SDLK_UP:
-					ugui_put_event(gui, UGUI_EVT_UP);
-					break;
-				case SDLK_DOWN:
-					ugui_put_event(gui, UGUI_EVT_DOWN);
-					break;
-				case SDLK_LEFT:
-					ugui_put_event(gui, UGUI_EVT_LEFT);
-					break;
-				case SDLK_RIGHT:
-					ugui_put_event(gui, UGUI_EVT_RIGHT);
-					break;
-				case SDLK_ESCAPE:
-				case SDLK_q:
-					running = 0;
-					break;
-				}
-			}
+		//Process input events
+#ifdef USE_SDL2
+		int event = ugui_sdl_get_event(sdl_ctx);
+#else
+		int event = get_input_event();
+#endif
+		if (event == UGUI_EVT_EXIT) {
+			break;
 		}
+
+		ugui_put_event(gui, event);
 
 		ugui_render(gui);
 
@@ -137,26 +129,18 @@ int main(int argc, char *argv[])
 
 		bmp_create_bw("test.bmp", GUI_WIDTH, GUI_HEIGHT, img);
 
-		SDL_Surface *bmp = SDL_LoadBMP("test.bmp");
-		SDL_Texture *tex = SDL_CreateTextureFromSurface(ren, bmp);
-
-		SDL_RenderClear(ren);
-		SDL_RenderCopy(ren, tex, NULL, NULL);
-		SDL_RenderPresent(ren);
-
-		SDL_DestroyTexture(tex);
-
-		SDL_FreeSurface(bmp);
+#ifdef USE_SDL2
+		ugui_sdl_render_bmp(sdl_ctx, "test.bmp");
+#endif
 
 		usleep(1000);
 	}
 
 	ugui_destroy(gui);
 
-	SDL_DestroyRenderer(ren);
-	SDL_DestroyWindow(win);
-
-	SDL_Quit();
+#ifdef USE_SDL2
+	ugui_sdl_close(sdl_ctx);
+#endif
 
 	return 0;
 }

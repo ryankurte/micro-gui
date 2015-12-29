@@ -7,6 +7,10 @@ project (ugui)
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR})
 find_package(SDL2 REQUIRED)
 
+if(NOT DEFINED NO_SDL2)
+add_definitions("-DUSE_SDL2=1")
+endif()
+
 include_directories(${SDL2_INCLUDE_DIR})
 
 include(${CMAKE_CURRENT_SOURCE_DIR}/ugui.cmake)
