@@ -8,34 +8,37 @@
 
 
 typedef struct ugui_menu_index_s {
-	int32_t x;
-	int32_t y;
+	uint32_t x;
+	uint32_t y;
 } ugui_menu_index_t;
 
 
-typedef int32_t (*menu_get_num_callback)(void *menu_layer, void* data);
-typedef int16_t (*menu_get_height_callback)(void *menu_layer, uint16_t section, void* data);
+typedef uint32_t menu_get_num_callback(void *menu_layer, void* data);
+typedef uint32_t menu_get_height_callback(void *menu_layer, uint16_t section, void* data);
 
-typedef void (*header_draw_callback)(ugui_graphics_t *graphics_ctx, ugui_layer_t *layer, char* title);
-typedef void (*menu_draw_callback)(ugui_graphics_t *graphics_ctx, ugui_layer_t *layer, char* title, char* data);
+typedef void menu_get_data_callback(void* menu_layer, int index, char* title, char* data);
+typedef void menu_select_callback(void *menu_layer, ugui_menu_index_t *cell_index, void *callback_context);
 
-typedef void (*menu_get_data_cb)(void* menu_layer, int index, char* title, char* data);
-typedef void (*menu_select_callback)(void *menu_layer, ugui_menu_index_t *cell_index, void *callback_context);
+typedef void header_draw_callback(ugui_graphics_t *graphics_ctx, ugui_rect_t *bounds, char* title);
+typedef void menu_draw_callback(ugui_graphics_t *graphics_ctx, ugui_rect_t *bounds, char* title, char* data);
+
 
 typedef struct ugui_menu_widget_data_callbacks_s {
-	menu_get_num_callback get_num_sections;
-	menu_get_num_callback get_num_rows;
+	menu_get_num_callback *get_num_sections;
+	menu_get_num_callback *get_num_rows;
 
-	menu_get_height_callback get_header_height;
-	menu_get_height_callback get_cell_height;
+	menu_get_data_callback *get_data;
 
-	menu_select_callback select;
+	menu_select_callback *select;
 
 } ugui_menu_widget_data_callbacks_t;
 
 typedef struct ugui_menu_widget_draw_callbacks_s {
-	header_draw_callback draw_header;
-	menu_draw_callback draw_row;
+	menu_get_num_callback *get_header_height;
+	menu_get_num_callback *get_cell_height;
+
+	header_draw_callback *draw_header;
+	menu_draw_callback *draw_row;
 
 } ugui_menu_widget_draw_callbacks_t;
 
