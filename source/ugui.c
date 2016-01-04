@@ -50,7 +50,11 @@ uint8_t* ugui_get_image(ugui_t* gui)
 
 void ugui_put_event(ugui_t* gui, uint8_t event)
 {
-	//TODO: pass event to active window handler
+	//Bypass for null events
+	if(event == UGUI_EVT_NONE) {
+		return;
+	}
+	//Pass event to active window handler
 	ugui_window_t *current = gui->windows[gui->window_index - 1];
 	_ugui_window_put_event(current, event);
 }

@@ -3,23 +3,17 @@
 #include <stdbool.h>
 #include <unistd.h>
 
-#include "ugui/ugui_sdl.h"
-
 #include "ugui/ugui.h"
+
+#include "ugui/ugui_sdl.h"
 #include "ugui/bmp.h"
 
 #include "menu_window.h"
-#include "line_window.h"
-#include "circle_window.h"
-#include "layer_window.h"
 
 #define GUI_WIDTH	640
 #define GUI_HEIGHT	480
 
 ugui_t* gui;
-ugui_window_t* line_test_window;
-ugui_window_t* circle_test_window;
-ugui_window_t* layer_test_window;
 ugui_window_t* menu_test_window;
 int running;
 
@@ -51,22 +45,6 @@ int get_input_event()
 	return event;
 }
 
-void handle_event(ugui_window_t* window, int event)
-{
-	if (event == UGUI_EVT_RIGHT) {
-		ugui_window_stack_pop(gui);
-		ugui_window_stack_push(gui, circle_test_window);
-	} else if (event == UGUI_EVT_LEFT) {
-		ugui_window_stack_pop(gui);
-		ugui_window_stack_push(gui, line_test_window);
-	} else if (event == UGUI_EVT_UP) {
-		ugui_window_stack_pop(gui);
-		ugui_window_stack_push(gui, layer_test_window);
-	} else if (event == UGUI_EVT_BACK) {
-		running = 0;
-	}
-}
-
 int main(int argc, char *argv[])
 {
 
@@ -94,17 +72,10 @@ printf("\r\n------------------------------------\r\n");
 	running = 1;
 
 	menu_test_window = menu_window_create(GUI_WIDTH, GUI_HEIGHT);
-	ugui_window_set_event_handler(menu_test_window, handle_event);
+	//ugui_window_set_event_handler(menu_test_window, handle_event, NULL);
+#if 0
 
-	line_test_window = line_window_create(GUI_WIDTH, GUI_HEIGHT);
-	ugui_window_set_event_handler(line_test_window, handle_event);
-
-	circle_test_window = circle_window_create(GUI_WIDTH, GUI_HEIGHT);
-	ugui_window_set_event_handler(circle_test_window, handle_event);
-
-	layer_test_window = layer_window_create(GUI_WIDTH, GUI_HEIGHT);
-	ugui_window_set_event_handler(layer_test_window, handle_event);
-
+#endif
 	ugui_window_stack_push(gui, menu_test_window);
 
 	ugui_render(gui);

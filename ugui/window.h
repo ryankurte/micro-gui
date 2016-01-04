@@ -14,7 +14,7 @@ typedef struct ugui_window_s ugui_window_t;
 
 typedef void (*ugui_window_handler_t)(ugui_window_t *window);
 
-typedef void (*ugui_window_event_handler_t)(ugui_window_t *window, int event);
+typedef void (*ugui_window_event_handler_t)(ugui_window_t *window, int event, void* ctx);
 
 typedef struct ugui_window_handlers_s {
 	ugui_window_handler_t load;
@@ -29,7 +29,7 @@ ugui_layer_t* ugui_window_get_base_layer(ugui_window_t *window);
 
 void ugui_window_set_window_handlers(ugui_window_t *window, ugui_window_handlers_t *handlers);
 
-void ugui_window_set_event_handler(ugui_window_t *window, ugui_window_event_handler_t on_event);
+void ugui_window_set_event_handler(ugui_window_t *window, ugui_window_event_handler_t on_event, void* event_ctx);
 
 /***			Private				***/
 
