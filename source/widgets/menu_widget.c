@@ -39,8 +39,17 @@ static void menu_widget_layer_update(ugui_layer_t* layer, void* graphics_ctx, vo
 	char* data;
 
 	for (uint8_t i = 0; i < max_rows; i++) {
+		//Calculate row offset in pixels
 		cell_bounds.y = header_height + i * row_height;
+
 		menu_widget->draw_callbacks.draw_row(graphics_ctx, &cell_bounds, "test a", "test b");
+		
+		//Highlight selected cell
+		if ((i + menu_widget->offset) == menu_widget->selected) {
+			ugui_graphics_inverse_rect(graphics_ctx,
+			(ugui_point_t) {.x = cell_bounds.x, .y = cell_bounds.y},
+			(ugui_size_t) {.w = cell_bounds.w, .h = cell_bounds.h});
+		}
 	}
 }
 
@@ -82,7 +91,7 @@ static void ugui_menu_widget_basic_cell_draw(ugui_graphics_t* graphics_ctx, ugui
 	//Surround
 	ugui_graphics_draw_rect(graphics_ctx,
 	(ugui_point_t) {.x = x, .y = y},
-	(ugui_size_t) {.w = w-1, .h = h});
+	(ugui_size_t) {.w = w - 1, .h = h});
 #if 1
 	//Header
 	ugui_size_t title_size;
@@ -118,7 +127,7 @@ ugui_menu_widget_t *ugui_menu_widget_create(ugui_rect_t bounds) {
 	menu_widget->widget_layer = ugui_layer_create(bounds);
 
 	//Set location information
-	menu_widget->selected = 0;
+	menu_widget->selected = 1;
 	menu_widget->offset = 0;
 
 	//Default draw callbacks

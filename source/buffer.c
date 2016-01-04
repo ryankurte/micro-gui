@@ -63,6 +63,14 @@ void _ugui_buffer_get(ugui_buffer_t* buffer, ugui_point_t* point, ugui_pixel_t* 
 	*value = ((buffer->data[buffer->row_width_bytes * y + x] & (1 << shift)) != 0);
 }
 
+void _ugui_buffer_inverse(ugui_buffer_t* buffer, ugui_point_t* point) {
+	int y = point->y;
+	int x = point->x / 8;
+	int shift = point->x % 8;
+
+	buffer->data[buffer->row_width_bytes * y + x] ^= (1 << shift);
+}
+
 void _ugui_buffer_clear(ugui_buffer_t* buffer) {
 	for (int16_t i = 0; i < buffer->h; i++) {
 		for (int16_t j = 0; j < buffer->row_width_bytes; j++) {

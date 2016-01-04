@@ -4,7 +4,6 @@ cmake_minimum_required (VERSION 2.8.7)
 
 project (ugui)
 
-
 # Find SDL2 if required
 if(NOT DEFINED NO_SDL2)
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR})
@@ -16,7 +15,7 @@ include_directories(${SDL2_INCLUDE_DIR})
 
 include(${CMAKE_CURRENT_SOURCE_DIR}/ugui.cmake)
 
-set(CMAKE_C_FLAGS "-std=gnu11")
+set(CMAKE_C_FLAGS "-std=gnu11 -g")
 
 set(APP_SOURCES
 	example/source/main.c 

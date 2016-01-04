@@ -14,6 +14,8 @@ void _ugui_buffer_set(ugui_buffer_t* buffer, ugui_point_t* point, ugui_pixel_t v
 
 void _ugui_buffer_get(ugui_buffer_t* buffer, ugui_point_t* point, ugui_pixel_t* value);
 
+void _ugui_buffer_inverse(ugui_buffer_t* buffer, ugui_point_t* point);
+
 void _ugui_buffer_clear(ugui_buffer_t* buffer);
 
 uint8_t* _ugui_buffer_get_data(ugui_buffer_t* buffer);

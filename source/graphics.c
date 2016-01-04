@@ -78,7 +78,7 @@ static void plot(ugui_graphics_t* graphics, uint32_t x, uint32_t y)
 
 }
 
-static void inverse(ugui_graphics_t* graphics, uint32_t x, uint32_t y)
+static void _ugui_graphics_inverse(ugui_graphics_t* graphics, uint32_t x, uint32_t y)
 {
 	//Calculate offsets
 	uint32_t new_x = x + graphics->offset_x;
@@ -88,18 +88,9 @@ static void inverse(ugui_graphics_t* graphics, uint32_t x, uint32_t y)
 	if ((new_x < graphics->w) && (x < graphics->limit_w)
 	        && (new_y < graphics->h) && (y < graphics->limit_h)) {
 		ugui_pixel_t pixel;
-		_ugui_buffer_get(graphics->buffer, &(ugui_point_t) {
+		_ugui_buffer_inverse(graphics->buffer, &(ugui_point_t) {
 			.x = new_x, .y = new_y
-		}, &pixel);
-		if (pixel == 1) {
-			_ugui_buffer_set(graphics->buffer, &(ugui_point_t) {
-				.x = new_x, .y = new_y
-			}, 0);
-		} else if(pixel == 0) {
-			_ugui_buffer_set(graphics->buffer, &(ugui_point_t) {
-				.x = new_x, .y = new_y
-			}, 1);
-		}
+		});
 	}
 }
 
@@ -136,7 +127,7 @@ void ugui_graphics_inverse_rect(ugui_graphics_t *graphics, ugui_point_t a, ugui_
 {
 	for (int i = 0; i < size.h; i++) {
 		for (int j = 0; j < size.w; j++) {
-			inverse(graphics, a.x + j, a.y + i);
+			_ugui_graphics_inverse(graphics, a.x + j, a.y + i);
 		}
 	}
 }
