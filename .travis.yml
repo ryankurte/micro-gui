@@ -1,17 +1,15 @@
 language: c
-
 addons:
   apt:
     packages:
     - cmake
     - make
-
 compiler:
-    - clang
-
+- clang
 script:
-    - mkdir build
-    - cd build && cmake -DNO_SDL2=1 .. && make
-
+- mkdir build
+- cd build && cmake -DNO_SDL2=1 .. && make
 notifications:
-    email: false
+  email: false
+  slack:
+    secure: BBXFfx5jmBiqsmHK0Jl+rT0CE2Mwot9hj8z1UGQ2bwSExidzQ7Ll5UNZfnaintqMSF6z/uJAMtV2R34a/cXOtWhw4QWxhexkxoOjybJlY/7OHykkqwELYIm74neoTuRmoYOKxTA8D+8zpCVddbjz1yP9KiZ49CYWXD0CWsP+1lhlWTL7FlpZLaLVkTCJq85SyUT42jUDaR4AhKa9G/J6XkY0FdU6gDNWSDobei6gYAJABAlXLgioneVuqw2IPt+sCkqhfj+WK6vqXkIiUjhtt+YRXcYeeyIFAvHdBCP+qJJE91LhGjsTHSLoh3PpfGzSjvM8gwdOjXkNTuElNrerEQSgPO0FvqyIr+Buk++tEPPYliJ4ek/O/I0NOG/n2eZXMANNocQjhD6kMGUvJ+PSompCoP2KeA0yG5q49qEIsvbr1twn9AiSTemMQnp4yQGKtxqjlNrHxfDcqRq4d3k7b7JzHF/BKtO8JKy/HXSmFRaCpnVGOFFlBBjpcApj7YV/WamxzgbaOfRkB0OkK0e1f8PW2hc31Xow5SThnHPvjqyE/roXjj6xdFpOcBaSagLrDrV2fMy7ypw+eTfgvY0eKAqz2Ouixe9YW1Je+ISYZ2lMF0AcJRcP9ADMZJPyRDFKZXMMirIWz/C4dfy5bwb9QNdJgVvQ6vfAvNAQJzCHyHI=
