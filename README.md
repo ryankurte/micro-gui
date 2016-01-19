@@ -8,6 +8,10 @@ It provides a simple window stack, layers for composition of windows, graphics f
 
 If you have any issues or feature requests, feel free to open an issue or a pull request. And, if you find yourself using this in a project, I would love to know about it!
 
+## Alternatives
+ - [u8glib](https://github.com/olikraus/u8glib) A graphics library with support for many different displays.
+ - [m2tklib](https://github.com/olikraus/m2tklib) Mini Interative Interface Toolkit Library. A portable graphical and character user interface (GUI+CUI) library for embedded systems
+
 ## Build Status
 [![Build Status](https://travis-ci.org/ryankurte/micro-gui.svg)](https://travis-ci.org/ryankurte/micro-gui)
 
