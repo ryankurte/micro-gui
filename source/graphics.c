@@ -295,14 +295,12 @@ void ugui_graphics_draw_text(ugui_graphics_t* graphics, char* text, font_style_t
 	uint16_t length = strlen(text);
 	ugui_sprite_t sprite;
 
-
 	for (uint16_t i = 0; i < length; i++) {
 		char c = text[i];
 		_ugui_font_get_glyph(font, c, &sprite);
 		ugui_graphics_draw_sprite(graphics, sprite, point);
 		point.x += sprite.w;
 	}
-
 }
 
 void _ugui_graphics_push_layer_ctx(ugui_graphics_t* graphics, ugui_rect_t* bounds)

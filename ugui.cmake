@@ -13,6 +13,7 @@ set(UGUI_SOURCES
 
 set(UGUI_WIDGETS
 	${CMAKE_CURRENT_LIST_DIR}/source/widgets/menu_widget.c
+	${CMAKE_CURRENT_LIST_DIR}/source/widgets/text_widget.c
 	)
 
 #TODO: glob font sources

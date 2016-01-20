@@ -12,6 +12,7 @@
 #include "line_window.h"
 #include "circle_window.h"
 #include "layer_window.h"
+#include "text_window.h"
 
 //Demo type for use in menu widget
 typedef struct demo_s {
@@ -32,12 +33,15 @@ ugui_menu_widget_t *menu_widget;
 ugui_window_t* line_test_window;
 ugui_window_t* circle_test_window;
 ugui_window_t* layer_test_window;
+ugui_window_t* text_test_window;
+
 
 //Demo list (for use in menu widget)
 demo_t demos[] = {
 	{"Layer Demo", "Demonstrates layered rendering contexts", &layer_test_window},
 	{"Ellipse Demo", "Demonstrates rendering of ellipses", &circle_test_window},
-	{"Line Demo", "Demonstrates rendering of lines", &line_test_window}
+	{"Line Demo", "Demonstrates rendering of lines", &line_test_window},
+	{"Text Demo", "Demonstrates rendering of text", &text_test_window}
 };
 
 char* title = "Micro-GUI (ugui) Demo Application";
@@ -98,7 +102,7 @@ ugui_window_t *menu_window_create(uint32_t w, uint32_t h)
 	//Setup widget
 	menu_widget = ugui_menu_widget_create((ugui_rect_t) {
 		.w = w,
-		 .h = h
+		.h = h
 	});
 
 	ugui_menu_widget_data_callbacks_t example_callbacks;
@@ -130,6 +134,9 @@ ugui_window_t *menu_window_create(uint32_t w, uint32_t h)
 
 	layer_test_window = layer_window_create(w, h);
 	ugui_window_set_event_handler(layer_test_window, demo_handle_event, NULL);
+
+	text_test_window = text_window_create(w, h);
+	ugui_window_set_event_handler(text_test_window, demo_handle_event, NULL);
 
 	return menu_window;
 }

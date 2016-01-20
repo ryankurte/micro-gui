@@ -21,8 +21,6 @@ static void menu_widget_layer_update(ugui_layer_t* layer, void* graphics_ctx, vo
 	ugui_menu_widget_t* menu_widget = (ugui_menu_widget_t*) layer_ctx;
 	ugui_rect_t* bounds = ugui_layer_get_bounds(layer);
 
-	
-
 	int32_t num_rows = menu_widget->data_callbacks.get_num_rows(menu_widget, menu_widget->data);
 	int32_t header_height = menu_widget->draw_callbacks.get_header_height(menu_widget, menu_widget->data);
 	int32_t row_height = menu_widget->draw_callbacks.get_cell_height(menu_widget, menu_widget->data);

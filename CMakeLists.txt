@@ -23,6 +23,7 @@ set(APP_SOURCES
 	example/source/line_window.c 
 	example/source/circle_window.c 
 	example/source/layer_window.c
+	example/source/text_window.c
 	)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/example/include)
