@@ -3,9 +3,6 @@
 
 #include <stdlib.h>
 
-#define UGUI_MENU_WIDGET_MAX_CELLS	8
-//TODO: assert to ensure num cells < num layers
-
 struct ugui_text_widget_s {
 	ugui_layer_t* widget_layer;
 
@@ -14,7 +11,12 @@ struct ugui_text_widget_s {
 	char* text;
 };
 
-//TODO: refactor this to be sane
+//TODO: this whole module is awful
+//this method in particular needs refactoring
+//Also, do we really need everything to derive from a layer? Seems wasteful when only some
+//objects can actually contain children, and as such this would be more sensible as a
+// "text area" or something.
+//TODO: support text justification
 static void text_widget_layer_update(ugui_layer_t* layer, void* graphics_ctx, void* layer_ctx)
 {
 	ugui_text_widget_t* text_widget = (ugui_text_widget_t*) layer_ctx;

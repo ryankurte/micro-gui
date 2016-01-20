@@ -25,7 +25,7 @@ ugui_window_t *text_window_create(uint32_t w, uint32_t h)
 {
 	text_window = ugui_window_create(w, h);
 
-	text_widget = ugui_text_widget_create((ugui_rect_t) {.x = 0, .y = 0, .w = w, .h = h});
+	text_widget = ugui_text_widget_create((ugui_rect_t) {.x = w / 8, .y = h / 8, .w = w / 8 * 6, .h = h / 8 * 6});
 
 	ugui_text_widget_set_text(text_widget, &font_robotomono_regular_18, sample_one, 0);
 
