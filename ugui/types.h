@@ -10,11 +10,29 @@ extern "C" {
 #endif
 
 #if defined(UGUI_MODE_COLOR_16BIT)
+#error NOT YET SUPPORTED
+struct ugui_pixel_s {
+	uint8_t r : 5;
+	uint8_t g : 6;
+	uint8_t b : 5;
+} __attribute((packed));
+
+typedef struct ugui_pixel_s ugui_pixel_t;
 
 #elif defined(UGUI_MODE_COLOR_24BIT)
 
+struct ugui_pixel_s {
+	uint8_t r;
+	uint8_t g;
+	uint8_t b;
+} __attribute((packed));
+
+typedef struct ugui_pixel_s ugui_pixel_t;
+
 #else
+
 typedef bool ugui_pixel_t;
+
 #endif
 
 typedef struct ugui_point_s {

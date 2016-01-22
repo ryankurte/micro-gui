@@ -8,7 +8,7 @@
 
 typedef struct ugui_buffer_s ugui_buffer_t;
 
-ugui_buffer_t* _ugui_buffer_create(uint16_t w, uint16_t h, int8_t bits_per_pixel);
+ugui_buffer_t* _ugui_buffer_create(uint16_t w, uint16_t h, uint16_t porch, uint16_t trailer);
 
 void _ugui_buffer_set(ugui_buffer_t* buffer, ugui_point_t* point, ugui_pixel_t value);
 

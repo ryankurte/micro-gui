@@ -21,7 +21,7 @@ ugui_t* ugui_create(uint32_t w, uint32_t h)
 {
 	ugui_t* gui = malloc(sizeof(struct ugui_s));
 
-	gui->buffer = _ugui_buffer_create(w, h, 1);
+	gui->buffer = _ugui_buffer_create(w, h, 0, 0);
 
 	gui->w = w;
 	gui->h = h;
