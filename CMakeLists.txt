@@ -2,7 +2,7 @@
 
 cmake_minimum_required (VERSION 2.8.7)
 
-project (ugui)
+project (ugui-example)
 
 # Find SDL2 if required
 if(NOT DEFINED NO_SDL2)
