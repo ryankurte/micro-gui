@@ -40,4 +40,4 @@ endif()
 
 include_directories(${CMAKE_CURRENT_LIST_DIR})
 
-add_library(libugui ${UGUI_SOURCES} ${UGUI_SDL} ${UGUI_FONTS} ${UGUI_ICONS} ${UGUI_WIDGETS})
+add_library(ugui ${UGUI_SOURCES} ${UGUI_SDL} ${UGUI_FONTS} ${UGUI_ICONS} ${UGUI_WIDGETS})

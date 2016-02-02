@@ -29,4 +29,4 @@ set(APP_SOURCES
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/example/include)
 
 add_executable (${CMAKE_PROJECT_NAME} ${APP_SOURCES})
-target_link_libraries(${CMAKE_PROJECT_NAME} libugui ${SDL2_LIBRARY})
+target_link_libraries(${CMAKE_PROJECT_NAME} ugui ${SDL2_LIBRARY})
