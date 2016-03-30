@@ -20,6 +20,8 @@
 
 #include "ugui/types.h"
 
+#define FONT_DEFAULT	(&font_robotomono_regular_16)
+
 //Struct encapsulating a font style
 //TODO: this seemingly has to be public to allow fonts to be instantiated
 //maybe there is a better way here

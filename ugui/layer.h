@@ -30,6 +30,8 @@ void ugui_layer_set_update(ugui_layer_t* layer, ugui_layer_update_t update);
 
 void ugui_layer_set_dirty(ugui_layer_t* layer);
 
+void ugui_layer_set_visible(ugui_layer_t* layer, bool visible);
+
 
 /***			Private				***/
 

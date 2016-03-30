@@ -11,9 +11,9 @@ extern "C" {
 #endif
 
 enum ugui_text_alignment_e {
-	UGUI_TEXT_LEFT,
-	UGUI_TEXT_CENTER,
-	UGUI_TEXT_RIGHT
+	UGUI_TEXT_ALIGN_LEFT,
+	UGUI_TEXT_ALIGN_CENTER,
+	UGUI_TEXT_ALIGN_RIGHT
 };
 
 typedef struct ugui_text_widget_s ugui_text_widget_t;
