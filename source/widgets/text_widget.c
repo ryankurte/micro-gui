@@ -4,6 +4,7 @@
 
 #include <stdlib.h>
 #include <assert.h>
+#include <string.h>
 
 
 struct ugui_text_widget_s {
