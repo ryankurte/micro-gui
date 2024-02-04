@@ -2,5 +2,5 @@
 
 mkdir build
 cd build
-cmake ../
+cmake -DNO_SDL2=1 ../
 make
